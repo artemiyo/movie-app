@@ -20,15 +20,47 @@ const StayInTouchBlock = styled.div`
 
 const NavListItem = styled.li`
   display: block;
+  position: relative;
+  cursor: pointer;
+
+  &:hover:after {
+    width: 80%;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    bottom: -40%;
+    left: -23%;
+    width: 0%;
+    height: 200%;
+    z-index: -1;
+    background: linear-gradient(
+      to right,
+      rgba(132, 142, 242, 1),
+      rgba(132, 142, 242, 0.9),
+      rgba(132, 142, 242, 0.8),
+      rgba(132, 142, 242, 0.7),
+      rgba(132, 142, 242, 0.6),
+      rgba(132, 142, 242, 0.5),
+      rgba(132, 142, 242, 0.4),
+      rgba(132, 142, 242, 0.3),
+      rgba(132, 142, 242, 0.2),
+      rgba(132, 142, 242, 0.1),
+      rgba(132, 142, 242, 0)
+    );
+    transition: width 0.3s ease;
+  }
 
   &:not(:last-child) {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 `;
 
 const MainLink = styled(Link)`
   &:link,
   &:visited {
+    display: block;
     font-size: 1.6rem;
     text-transform: uppercase;
     color: var(--color-main);
