@@ -8,7 +8,7 @@ const MoviesLink = styled(Link)`
   &:link,
   &:visited {
     display: inline-block;
-    max-width: 30rem;
+    max-width: 29rem;
     color: var(--color-main);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -24,7 +24,7 @@ const MoviesLink = styled(Link)`
 
 const MovieImage = styled.img`
   width: 100%;
-  height: 43rem;
+  height: 40rem;
   transition: all 0.3s ease;
 `;
 
@@ -48,15 +48,12 @@ const Rating = styled.span`
   font-weight: 400;
 `;
 
-const MoviesItem = () => {
+const MoviesItem = ({ imgUrl }) => {
   return (
     <MoviesLink to='/'>
-      <MovieImage
-        src='http://t1.gstatic.com/images?q=tbn:ANd9GcRvT1-_-HEbugPo6K_IPqx3tYSXDXOSzw9ZGeNOsB-iit8zf752'
-        alt='Title'
-      />
+      <MovieImage src={imgUrl} alt='Title' />
       <MovieDetails>
-        <MovieTitle>Avengers</MovieTitle>
+        <MovieTitle>Title of the Movie</MovieTitle>
         <Rating>
           <Icon icon={faStar} />
           7.4

@@ -43,16 +43,14 @@ const Movies = () => {
       </SearchPanel>
       <CategoryHeading>Trending</CategoryHeading>
       <MoviesList>
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
+        <MoviesItem imgUrl='http://t1.gstatic.com/images?q=tbn:ANd9GcRvT1-_-HEbugPo6K_IPqx3tYSXDXOSzw9ZGeNOsB-iit8zf752' />
+        <MoviesItem imgUrl='http://kinohod.ru/o/9d/e1/9de1ae01-2003-47a9-81c4-5db56fff8fd6.jpg' />
+        <MoviesItem imgUrl='http://fr.web.img6.acsta.net/pictures/19/05/24/12/34/5876657.jpg' />
+        <MoviesItem imgUrl='https://images-na.ssl-images-amazon.com/images/I/91KkWf50SoL._SY445_.jpg' />
+        <MoviesItem imgUrl='http://fr.web.img6.acsta.net/pictures/19/05/24/12/34/5876657.jpg' />
+        <MoviesItem imgUrl='https://images-na.ssl-images-amazon.com/images/I/91KkWf50SoL._SY445_.jpg' />
+        <MoviesItem imgUrl='http://t1.gstatic.com/images?q=tbn:ANd9GcRvT1-_-HEbugPo6K_IPqx3tYSXDXOSzw9ZGeNOsB-iit8zf752' />
+        <MoviesItem imgUrl='http://kinohod.ru/o/9d/e1/9de1ae01-2003-47a9-81c4-5db56fff8fd6.jpg' />
       </MoviesList>
     </MoviesWrapper>
   );
