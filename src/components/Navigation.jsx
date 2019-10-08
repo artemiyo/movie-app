@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const stayInTouchItems = ['Trending', 'Top Rated', 'Upcoming'];
-
-const NavigationWrapper = styled.div``;
+import { stayInTouchItems, genres } from '../utils/data';
 
 const Heading = styled.h5`
   font-size: 1.2rem;
@@ -14,8 +11,17 @@ const Heading = styled.h5`
   margin-bottom: 3rem;
 `;
 
+const Links = styled(Link)`
+  &:link,
+  &:visited {
+    display: block;
+    color: var(--color-main);
+    text-decoration: none;
+  }
+`;
+
 const StayInTouchBlock = styled.div`
-  margin-top: 8rem;
+  margin: 5rem 0;
 `;
 
 const NavListItem = styled.li`
@@ -53,39 +59,55 @@ const NavListItem = styled.li`
   }
 
   &:not(:last-child) {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 `;
 
-const MainLink = styled(Link)`
+const MainLink = styled(Links)`
   &:link,
   &:visited {
-    display: block;
     font-size: 1.6rem;
+    font-weight: 800;
     text-transform: uppercase;
-    color: var(--color-main);
-    text-decoration: none;
   }
 `;
 
-const GenreLink = styled(Link)``;
+const GenreLink = styled(Links)`
+  &:link,
+  &:visited {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+`;
+
+const renderCategories = (categories, categoryLink) => LinkWrapper => {
+  return categories.map((category, id) => (
+    <NavListItem key={id}>
+      <LinkWrapper to={`/${categoryLink}/${category.toLowerCase()}`}>
+        {category}
+      </LinkWrapper>
+    </NavListItem>
+  ));
+};
+
+// Component
 
 const Navigation = () => {
   return (
-    <NavigationWrapper>
+    <div>
       <StayInTouchBlock>
         <Heading>Stay in Touch</Heading>
         <nav>
-          <ul>
-            {stayInTouchItems.map((item, id) => (
-              <NavListItem key={id}>
-                <MainLink to={`/movie/${item.toLowerCase()}`}>{item}</MainLink>
-              </NavListItem>
-            ))}
-          </ul>
+          <ul>{renderCategories(stayInTouchItems, 'movie')(MainLink)}</ul>
         </nav>
       </StayInTouchBlock>
-    </NavigationWrapper>
+      <div>
+        <Heading>Genres</Heading>
+        <nav>
+          <ul>{renderCategories(genres, 'genres')(GenreLink)}</ul>
+        </nav>
+      </div>
+    </div>
   );
 };
 

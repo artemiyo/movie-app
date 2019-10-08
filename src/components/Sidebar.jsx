@@ -10,7 +10,7 @@ const SidebarWrapper = styled.div`
   left: 0;
   height: 100%;
   width: 20%;
-  padding: 6rem;
+  padding: 6rem 6rem 3rem 6rem;
   background-color: var(--color-sidebar);
   z-index: 1;
   overflow-x: hidden;
