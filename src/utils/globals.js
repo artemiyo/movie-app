@@ -24,7 +24,7 @@ export default createGlobalStyle`
 	body {
 		font-family: 'Roboto', sans-serif;
 		font-weight: 400;
-		letter-spacing: 0.15em;
+		letter-spacing: 0.2em;
 		color: var(--color-main);
 	}
 

@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar';
 import Movies from './components/Movies';
 
 const MainWrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   display: flex;
   position: relative;
 `;
