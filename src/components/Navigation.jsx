@@ -30,7 +30,7 @@ const NavListItem = styled.li`
   cursor: pointer;
 
   &:hover:after {
-    width: 80%;
+    width: 70%;
   }
 
   &::after {
