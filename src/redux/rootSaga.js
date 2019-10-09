@@ -1,3 +1,7 @@
+import { all, call } from 'redux-saga/effects';
+
+import { genresSaga } from './genres/genresSaga';
+
 export default function* rootSaga() {
-  yield console.log(123);
+  yield all([call(genresSaga)]);
 }

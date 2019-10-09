@@ -1,4 +1,4 @@
-const stayInTouchItems = ['Trending', 'Top Rated', 'Upcoming'];
+const stayInTouchItems = ['Popular', 'Top Rated', 'Upcoming'];
 const genres = [
   'Action',
   'Adventure',

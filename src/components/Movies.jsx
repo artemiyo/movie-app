@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 import MoviesItem from './MoviesItem';
 import Search from './Search';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import Liked from './Liked';
 
 const MoviesWrapper = styled.div`
@@ -41,7 +39,7 @@ const Movies = () => {
         <Search />
         <Liked />
       </SearchPanel>
-      <CategoryHeading>Trending</CategoryHeading>
+      <CategoryHeading>Popular</CategoryHeading>
       <MoviesList>
         <MoviesItem imgUrl='http://t1.gstatic.com/images?q=tbn:ANd9GcRvT1-_-HEbugPo6K_IPqx3tYSXDXOSzw9ZGeNOsB-iit8zf752' />
         <MoviesItem imgUrl='http://kinohod.ru/o/9d/e1/9de1ae01-2003-47a9-81c4-5db56fff8fd6.jpg' />

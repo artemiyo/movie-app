@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import Container from './components/Container';
 import Sidebar from './components/Sidebar';
@@ -18,6 +19,9 @@ function App() {
         <MainWrapper>
           <Sidebar />
           <Movies />
+          <Switch>
+            <Route />
+          </Switch>
         </MainWrapper>
       </Container>
     </div>

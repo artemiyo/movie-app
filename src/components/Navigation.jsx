@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { stayInTouchItems, genres } from '../utils/data';
+import moviedbAPI from '../api/moviedbAPI';
+
+import { fetchGenresStart } from '../redux/genres/genresActions';
 
 const Heading = styled.h5`
   font-size: 1.2rem;
@@ -80,11 +84,23 @@ const GenreLink = styled(Links)`
   }
 `;
 
-const renderCategories = (categories, categoryLink) => LinkWrapper => {
+const renderStatic = categories => LinkWrapper => {
   return categories.map((category, id) => (
     <NavListItem key={id}>
-      <LinkWrapper to={`/${categoryLink}/${category.toLowerCase()}`}>
+      <LinkWrapper
+        to={`${process.env.PUBLIC_URL}/discover/${category.toLowerCase()}`}>
         {category}
+      </LinkWrapper>
+    </NavListItem>
+  ));
+};
+
+const renderGenres = genres => LinkWrapper => {
+  return genres.map(genre => (
+    <NavListItem key={genre.id}>
+      <LinkWrapper
+        to={`${process.env.PUBLIC_URL}/genres/${genre.toLowerCase()}`}>
+        {genre}
       </LinkWrapper>
     </NavListItem>
   ));
@@ -92,23 +108,44 @@ const renderCategories = (categories, categoryLink) => LinkWrapper => {
 
 // Component
 
-const Navigation = () => {
+const Navigation = ({ fetchGenresStart }) => {
+  useEffect(() => {
+    // fetchGenresStart();
+    console.log(
+      moviedbAPI.get(`/genre/movie/list?api_key=${process.env.REACT_API_KEY}`)
+    );
+  });
+
   return (
     <div>
       <StayInTouchBlock>
         <Heading>Stay in Touch</Heading>
         <nav>
-          <ul>{renderCategories(stayInTouchItems, 'movie')(MainLink)}</ul>
+          <ul>{renderStatic(stayInTouchItems)(MainLink)}</ul>
         </nav>
       </StayInTouchBlock>
       <div>
         <Heading>Genres</Heading>
         <nav>
-          <ul>{renderCategories(genres, 'genres')(GenreLink)}</ul>
+          <ul>{renderGenres(genres)(GenreLink)}</ul>
         </nav>
       </div>
     </div>
   );
 };
 
-export default Navigation;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    genres: state.genresList
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchGenresStart: () => dispatch(fetchGenresStart())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navigation);
