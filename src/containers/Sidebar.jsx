@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Logo from './Logo';
-import Navigation from './Navigation';
+import Logo from '../components/Logo';
+import Navigation from '../components/Navigation';
 
 // ========================== STYLES:BEGIN ========================== //
 

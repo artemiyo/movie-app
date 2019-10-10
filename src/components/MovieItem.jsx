@@ -10,7 +10,7 @@ const MovieLink = styled(Link)`
   &:link,
   &:visited {
     display: inline-block;
-    max-width: 29rem;
+    max-width: 25rem;
     color: var(--color-main);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -26,7 +26,7 @@ const MovieLink = styled(Link)`
 
 const MovieImage = styled.img`
   width: 100%;
-  height: 40rem;
+  height: 37rem;
   transition: all 0.3s ease;
 `;
 

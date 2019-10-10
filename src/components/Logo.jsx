@@ -11,7 +11,7 @@ const LogoWrapper = styled.div`
   text-align: center;
 `;
 
-const Icon = styled(FontAwesomeIcon)`
+const LogoIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
   color: var(--color-hover);
 `;
@@ -27,18 +27,14 @@ const LogoLink = styled(Link)`
   }
 `;
 
-const ColorLetter = styled.span`
-  color: var(--color-hover);
-`;
-
 // ========================== STYLES:END ========================== //
 
 const Logo = () => {
   return (
     <LogoWrapper>
       <LogoLink to='/'>
-        <Icon icon={faFilm} />
-        Mov<ColorLetter>i</ColorLetter>es
+        <LogoIcon icon={faFilm} />
+        Movies
       </LogoLink>
     </LogoWrapper>
   );
