@@ -3,6 +3,7 @@ import { takeLatest, all, put, call } from 'redux-saga/effects';
 import { fetchGenresSuccess, fetchGenressFailure } from './genresActions';
 import genresTypes from './genresTypes';
 
+// Worker Saga for getting genres
 export function* fetchGenresAsync() {
   try {
     const response = yield fetch(
@@ -14,7 +15,7 @@ export function* fetchGenresAsync() {
     yield put(fetchGenressFailure(err));
   }
 }
-
+// Watcher Saga for getting genres
 export function* fetchGenresStart() {
   yield takeLatest(genresTypes.FETCH_GENRES_START, fetchGenresAsync);
 }
