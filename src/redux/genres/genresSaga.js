@@ -1,14 +1,15 @@
 import { takeLatest, all, put, call } from 'redux-saga/effects';
 
-import moviedbAPI from '../../api/moviedbAPI';
-
 import { fetchGenresSuccess, fetchGenressFailure } from './genresActions';
 import genresTypes from './genresTypes';
 
 export function* fetchGenresAsync() {
   try {
-    const response = yield moviedbAPI.get('/genre/movie/list');
-    yield put(fetchGenresSuccess(response.data));
+    const response = yield fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_KEY}`
+    );
+    const data = yield response.json();
+    yield put(fetchGenresSuccess(data));
   } catch (err) {
     yield put(fetchGenressFailure(err));
   }

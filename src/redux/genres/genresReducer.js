@@ -1,7 +1,7 @@
 import genresTypes from './genresTypes';
 
 const INITIAL_STATE = {
-  isGenresLoading: false,
+  isGenresLoading: true,
   genresList: [],
   errorMessage: ''
 };

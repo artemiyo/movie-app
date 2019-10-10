@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
+// ========================== STYLES:BEGIN ========================== //
+
 const Form = styled.form`
   width: 50rem;
   height: 4rem;
@@ -31,6 +33,8 @@ const SearchIcon = styled(FontAwesomeIcon)`
   font-size: 1.4rem;
   color: var(--color-body);
 `;
+
+// ========================== STYLES:END ========================== //
 
 const Search = () => {
   return (

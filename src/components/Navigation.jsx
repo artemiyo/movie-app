@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { stayInTouchItems, genres } from '../utils/data';
-import moviedbAPI from '../api/moviedbAPI';
+import { createStructuredSelector } from 'reselect';
+import styled from 'styled-components';
+import { stayInTouchItems } from '../utils/data';
+
+import {
+  selectGenresList,
+  selectIsGenresLoading
+} from '../redux/genres/genresSelectors';
 
 import { fetchGenresStart } from '../redux/genres/genresActions';
 
+// ========================== STYLES:BEGIN ========================== //
 const Heading = styled.h5`
   font-size: 1.2rem;
   font-weight: 100;
@@ -25,7 +31,7 @@ const Links = styled(Link)`
 `;
 
 const StayInTouchBlock = styled.div`
-  margin: 5rem 0;
+  margin: 4rem 0;
 `;
 
 const NavListItem = styled.li`
@@ -84,68 +90,61 @@ const GenreLink = styled(Links)`
   }
 `;
 
-const renderStatic = categories => LinkWrapper => {
+// ========================== STYLES:END ========================== //
+
+const renderStatic = categories => {
   return categories.map((category, id) => (
     <NavListItem key={id}>
-      <LinkWrapper
+      <MainLink
         to={`${process.env.PUBLIC_URL}/discover/${category.toLowerCase()}`}>
         {category}
-      </LinkWrapper>
+      </MainLink>
     </NavListItem>
   ));
 };
 
-const renderGenres = genres => LinkWrapper => {
+const renderGenres = genres => {
   return genres.map(genre => (
     <NavListItem key={genre.id}>
-      <LinkWrapper
-        to={`${process.env.PUBLIC_URL}/genres/${genre.toLowerCase()}`}>
-        {genre}
-      </LinkWrapper>
+      <GenreLink
+        to={`${process.env.PUBLIC_URL}/genres/${genre.name.toLowerCase()}`}>
+        {genre.name}
+      </GenreLink>
     </NavListItem>
   ));
 };
 
-// Component
-
-const Navigation = ({ fetchGenresStart }) => {
+const Navigation = ({ fetchGenresStart, genresList, isGenresLoading }) => {
   useEffect(() => {
-    // fetchGenresStart();
-    console.log(
-      moviedbAPI.get(`/genre/movie/list?api_key=${process.env.REACT_API_KEY}`)
-    );
-  });
+    fetchGenresStart();
+  }, [fetchGenresStart]);
 
   return (
     <div>
       <StayInTouchBlock>
         <Heading>Stay in Touch</Heading>
         <nav>
-          <ul>{renderStatic(stayInTouchItems)(MainLink)}</ul>
+          <ul>{renderStatic(stayInTouchItems)}</ul>
         </nav>
       </StayInTouchBlock>
       <div>
         <Heading>Genres</Heading>
         <nav>
-          <ul>{renderGenres(genres)(GenreLink)}</ul>
+          <ul>
+            {isGenresLoading ? <div>Loading...</div> : renderGenres(genresList)}
+          </ul>
         </nav>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  console.log(state);
-  return {
-    genres: state.genresList
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  fetchGenresStart: () => dispatch(fetchGenresStart())
+const mapStateToProps = createStructuredSelector({
+  genresList: selectGenresList,
+  isGenresLoading: selectIsGenresLoading
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { fetchGenresStart }
 )(Navigation);

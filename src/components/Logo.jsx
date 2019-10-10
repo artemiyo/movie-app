@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
 
+// ========================== STYLES:BEGIN ========================== //
+
 const LogoWrapper = styled.div`
   text-align: center;
 `;
@@ -28,6 +30,8 @@ const LogoLink = styled(Link)`
 const ColorLetter = styled.span`
   color: var(--color-hover);
 `;
+
+// ========================== STYLES:END ========================== //
 
 const Logo = () => {
   return (

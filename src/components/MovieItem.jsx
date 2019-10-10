@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-const MoviesLink = styled(Link)`
+// ========================== STYLES:BEGIN ========================== //
+
+const MovieLink = styled(Link)`
   &:link,
   &:visited {
     display: inline-block;
@@ -48,9 +50,11 @@ const Rating = styled.span`
   font-weight: 400;
 `;
 
+// ========================== STYLES:END ========================== //
+
 const MoviesItem = ({ imgUrl }) => {
   return (
-    <MoviesLink to='/'>
+    <MovieLink to='/'>
       <MovieImage src={imgUrl} alt='Title' />
       <MovieDetails>
         <MovieTitle>Title of the Movie</MovieTitle>
@@ -59,7 +63,7 @@ const MoviesItem = ({ imgUrl }) => {
           7.4
         </Rating>
       </MovieDetails>
-    </MoviesLink>
+    </MovieLink>
   );
 };
 

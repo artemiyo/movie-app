@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
+// ========================== STYLES:BEGIN ========================== //
+
 const SidebarWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -16,6 +18,7 @@ const SidebarWrapper = styled.div`
   overflow-x: hidden;
 `;
 
+// ========================== STYLES:BEGIN ========================== //
 const Sidebar = () => {
   return (
     <SidebarWrapper>
