@@ -13,7 +13,7 @@ const LogoWrapper = styled.div`
 
 const LogoIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
-  color: var(--color-hover);
+  color: ${props => props.theme.colors.hover};
 `;
 
 const LogoLink = styled(Link)`
@@ -22,7 +22,7 @@ const LogoLink = styled(Link)`
   &:visited {
     font-size: 3rem;
     text-transform: uppercase;
-    color: var(--color-main);
+    color: ${props => props.theme.colors.main};
     text-decoration: none;
   }
 `;

@@ -19,7 +19,7 @@ const MainWrapper = styled.div`
 const MoviesWrapper = styled.div`
   width: 80%;
   padding: 6rem;
-  background-color: var(--color-body);
+  background-color: ${props => props.theme.colors.body};
   margin-left: 20%;
 `;
 

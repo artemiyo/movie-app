@@ -11,7 +11,7 @@ const HeartIcon = styled(FontAwesomeIcon)`
   transition: all 0.3 ease;
 
   &:hover {
-    color: var(--color-hover);
+    color: ${props => props.theme.colors.hover};
     transform: scale(1.1);
   }
 `;

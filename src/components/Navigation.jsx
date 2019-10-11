@@ -7,7 +7,8 @@ import { stayInTouchItems } from '../utils/data';
 
 import {
   selectGenresList,
-  selectIsGenresLoading
+  selectIsGenresLoading,
+  selectGenreName
 } from '../redux/genres/genresSelectors';
 
 import { fetchGenresStart, getGenresName } from '../redux/genres/genresActions';
@@ -25,7 +26,7 @@ const Links = styled(Link)`
   &:link,
   &:visited {
     display: block;
-    color: var(--color-main);
+    color: ${props => props.theme.colors.main};
     text-decoration: none;
   }
 `;
@@ -95,7 +96,8 @@ const GenreLink = styled(Links)`
 const renderNavigation = (
   categories,
   mainLink,
-  getGenreName
+  getGenreName,
+  genreName
 ) => LinkWrapper => {
   return categories.map(({ name, id }) => (
     <NavListItem key={id} onClick={() => getGenreName(name)}>
@@ -111,7 +113,8 @@ const Navigation = ({
   fetchGenresStart,
   genresList,
   isGenresLoading,
-  getGenresName
+  getGenresName,
+  genreName
 }) => {
   useEffect(() => {
     fetchGenresStart();
@@ -123,9 +126,12 @@ const Navigation = ({
         <Heading>Discover</Heading>
         <nav>
           <ul>
-            {renderNavigation(stayInTouchItems, 'discover', getGenresName)(
-              MainLink
-            )}
+            {renderNavigation(
+              stayInTouchItems,
+              'discover',
+              getGenresName,
+              genreName
+            )(MainLink)}
           </ul>
         </nav>
       </Discover>
@@ -136,7 +142,9 @@ const Navigation = ({
             {isGenresLoading ? (
               <div>Loading...</div>
             ) : (
-              renderNavigation(genresList, 'genres', getGenresName)(GenreLink)
+              renderNavigation(genresList, 'genres', getGenresName, genreName)(
+                GenreLink
+              )
             )}
           </ul>
         </nav>
@@ -147,11 +155,11 @@ const Navigation = ({
 
 const mapStateToProps = createStructuredSelector({
   genresList: selectGenresList,
-  isGenresLoading: selectIsGenresLoading
+  isGenresLoading: selectIsGenresLoading,
+  genreName: selectGenreName
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log(ownProps);
+const mapDispatchToProps = dispatch => {
   return {
     fetchGenresStart: () => dispatch(fetchGenresStart()),
     getGenresName: name => dispatch(getGenresName(name))

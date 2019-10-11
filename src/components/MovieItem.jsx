@@ -11,7 +11,7 @@ const MovieLink = styled(Link)`
   &:visited {
     display: inline-block;
     max-width: 25rem;
-    color: var(--color-main);
+    color: ${props => props.theme.colors.main};
     text-decoration: none;
     transition: all 0.3s ease;
     margin-bottom: 5rem;
@@ -19,8 +19,8 @@ const MovieLink = styled(Link)`
 
   &:hover {
     transform: scale(1.03);
-    background-color: var(--color-sidebar);
-    color: var(--color-hover);
+    background-color: ${props => props.theme.colors.sidebar};
+    color: ${props => props.theme.colors.hover};
   }
 `;
 
