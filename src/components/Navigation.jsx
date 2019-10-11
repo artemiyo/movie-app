@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import { stayInTouchItems } from '../utils/data';
@@ -10,7 +10,7 @@ import {
   selectIsGenresLoading
 } from '../redux/genres/genresSelectors';
 
-import { fetchGenresStart } from '../redux/genres/genresActions';
+import { fetchGenresStart, getGenresName } from '../redux/genres/genresActions';
 
 // ========================== STYLES:BEGIN ========================== //
 const Heading = styled.h5`
@@ -30,7 +30,7 @@ const Links = styled(Link)`
   }
 `;
 
-const StayInTouchBlock = styled.div`
+const Discover = styled.div`
   margin: 4rem 0;
 `;
 
@@ -92,46 +92,52 @@ const GenreLink = styled(Links)`
 
 // ========================== STYLES:END ========================== //
 
-const renderStatic = categories => {
-  return categories.map((category, id) => (
-    <NavListItem key={id}>
-      <MainLink
-        to={`${process.env.PUBLIC_URL}/discover/${category.toLowerCase()}`}>
-        {category}
-      </MainLink>
+const renderNavigation = (
+  categories,
+  mainLink,
+  getGenreName
+) => LinkWrapper => {
+  return categories.map(({ name, id }) => (
+    <NavListItem key={id} onClick={() => getGenreName(name)}>
+      <LinkWrapper
+        to={`${process.env.PUBLIC_URL}/${mainLink}/${name.toLowerCase()}`}>
+        {name}
+      </LinkWrapper>
     </NavListItem>
   ));
 };
 
-const renderGenres = genres => {
-  return genres.map(genre => (
-    <NavListItem key={genre.id}>
-      <GenreLink
-        to={`${process.env.PUBLIC_URL}/genres/${genre.name.toLowerCase()}`}>
-        {genre.name}
-      </GenreLink>
-    </NavListItem>
-  ));
-};
-
-const Navigation = ({ fetchGenresStart, genresList, isGenresLoading }) => {
+const Navigation = ({
+  fetchGenresStart,
+  genresList,
+  isGenresLoading,
+  getGenresName
+}) => {
   useEffect(() => {
     fetchGenresStart();
   }, [fetchGenresStart]);
 
   return (
     <div>
-      <StayInTouchBlock>
-        <Heading>Stay in Touch</Heading>
+      <Discover>
+        <Heading>Discover</Heading>
         <nav>
-          <ul>{renderStatic(stayInTouchItems)}</ul>
+          <ul>
+            {renderNavigation(stayInTouchItems, 'discover', getGenresName)(
+              MainLink
+            )}
+          </ul>
         </nav>
-      </StayInTouchBlock>
+      </Discover>
       <div>
         <Heading>Genres</Heading>
         <nav>
           <ul>
-            {isGenresLoading ? <div>Loading...</div> : renderGenres(genresList)}
+            {isGenresLoading ? (
+              <div>Loading...</div>
+            ) : (
+              renderNavigation(genresList, 'genres', getGenresName)(GenreLink)
+            )}
           </ul>
         </nav>
       </div>
@@ -144,7 +150,17 @@ const mapStateToProps = createStructuredSelector({
   isGenresLoading: selectIsGenresLoading
 });
 
-export default connect(
-  mapStateToProps,
-  { fetchGenresStart }
-)(Navigation);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    fetchGenresStart: () => dispatch(fetchGenresStart()),
+    getGenresName: name => dispatch(getGenresName(name))
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Navigation)
+);

@@ -16,3 +16,8 @@ export const fetchGenressFailure = errorMessage => ({
   type: genresTypes.FETCH_GENRES_FAILURE,
   payload: errorMessage
 });
+
+export const getGenresName = name => ({
+  type: genresTypes.GET_GENRE_NAME,
+  payload: name
+});

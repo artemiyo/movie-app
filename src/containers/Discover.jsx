@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import MoviesList from '../components/MoviesList';
@@ -14,13 +15,17 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Movies = () => {
+const Discover = ({ genreName }) => {
   return (
     <div>
-      <Title>Popular</Title>
+      <Title>{genreName}</Title>
       <MoviesList />
     </div>
   );
 };
 
-export default Movies;
+const mapStateToProps = ({ genres: { genreName } }) => ({
+  genreName
+});
+
+export default connect(mapStateToProps)(Discover);

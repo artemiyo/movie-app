@@ -7,6 +7,7 @@ import Search from './components/Search';
 import Liked from './components/Liked';
 
 import Discover from './containers/Discover';
+import Genre from './containers/Genre';
 
 // ========================== STYLES:BEGIN ========================== //
 const MainWrapper = styled.div`
@@ -53,6 +54,10 @@ function App() {
             <Route
               path={`${process.env.PUBLIC_URL}/discover/:name`}
               component={Discover}
+            />
+            <Route
+              path={`${process.env.PUBLIC_URL}/genres/:name`}
+              component={Genre}
             />
           </Switch>
         </MoviesWrapper>

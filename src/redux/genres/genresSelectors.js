@@ -14,3 +14,8 @@ export const selectIsGenresLoading = createSelector(
   [selectGenres],
   genres => genres.isGenresLoading
 );
+
+export const selectGenreName = createSelector(
+  [selectGenres],
+  genres => genres.genreName
+);

@@ -3,7 +3,8 @@ import genresTypes from './genresTypes';
 const INITIAL_STATE = {
   isGenresLoading: true,
   genresList: [],
-  errorMessage: ''
+  errorMessage: '',
+  genreName: 'Popular'
 };
 
 const genresReducer = (state = INITIAL_STATE, action) => {
@@ -25,7 +26,11 @@ const genresReducer = (state = INITIAL_STATE, action) => {
         isGenresLoading: false,
         errorMessage: action.payload
       };
-
+    case genresTypes.GET_GENRE_NAME:
+      return {
+        ...state,
+        genreName: action.payload
+      };
     default:
       return state;
   }
