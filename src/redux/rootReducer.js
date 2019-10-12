@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import genresReducer from './genres/genresReducer';
+import navigationReducer from './navigation/navigationReducer';
 
 const rootReducer = combineReducers({
-  genres: genresReducer
+  navigation: navigationReducer
 });
 
 export default rootReducer;

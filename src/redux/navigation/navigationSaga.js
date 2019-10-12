@@ -1,7 +1,7 @@
 import { takeLatest, all, put, call } from 'redux-saga/effects';
 
-import { fetchGenresSuccess, fetchGenressFailure } from './genresActions';
-import genresTypes from './genresTypes';
+import { fetchGenresSuccess, fetchGenressFailure } from './navigationActions';
+import navigationTypes from './navigationTypes';
 
 // Worker Saga for getting genres
 export function* fetchGenresAsync() {
@@ -17,7 +17,7 @@ export function* fetchGenresAsync() {
 }
 // Watcher Saga for getting genres
 export function* fetchGenresStart() {
-  yield takeLatest(genresTypes.FETCH_GENRES_START, fetchGenresAsync);
+  yield takeLatest(navigationTypes.FETCH_GENRES_START, fetchGenresAsync);
 }
 
 export function* genresSaga() {

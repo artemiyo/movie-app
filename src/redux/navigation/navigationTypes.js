@@ -1,8 +1,8 @@
-const genresTypes = {
+const navigationTypes = {
   FETCH_GENRES_START: 'FETCH_GENRES_START',
   FETCH_GENRES_SUCCESS: 'FETCH_GENRES_SUCCESS',
   FETCH_GENRES_FAILURE: 'FETCH_GENRES_FAILURE',
-  GET_GENRE_NAME: 'GET_GENRE_NAME'
+  GET_NAVIGATION_NAME: 'GET_GENRE_NAME'
 };
 
-export default genresTypes;
+export default navigationTypes;

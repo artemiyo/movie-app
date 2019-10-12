@@ -15,17 +15,17 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Discover = ({ genreName }) => {
+const Discover = ({ navItemName }) => {
   return (
     <div>
-      <Title>{genreName}</Title>
+      <Title>{navItemName}</Title>
       <MoviesList />
     </div>
   );
 };
 
-const mapStateToProps = ({ genres: { genreName } }) => ({
-  genreName
+const mapStateToProps = ({ navigation: { navItemName } }) => ({
+  navItemName
 });
 
 export default connect(mapStateToProps)(Discover);

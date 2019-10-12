@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
-import { stayInTouchItems } from '../utils/data';
+import { stayInTouchItems as discover } from '../utils/data';
 
 import {
   selectGenresList,
-  selectIsGenresLoading,
-  selectGenreName
-} from '../redux/genres/genresSelectors';
+  selectIsGenresLoading
+} from '../redux/navigation/navigationSelectors';
 
-import { fetchGenresStart, getGenresName } from '../redux/genres/genresActions';
+import {
+  fetchGenresStart,
+  getNavItemName
+} from '../redux/navigation/navigationActions';
 
 // ========================== STYLES:BEGIN ========================== //
 const Heading = styled.h5`
@@ -96,11 +98,10 @@ const GenreLink = styled(Links)`
 const renderNavigation = (
   categories,
   mainLink,
-  getGenreName,
-  genreName
+  getNavItemName
 ) => LinkWrapper => {
   return categories.map(({ name, id }) => (
-    <NavListItem key={id} onClick={() => getGenreName(name)}>
+    <NavListItem key={id} onClick={() => getNavItemName(name)}>
       <LinkWrapper
         to={`${process.env.PUBLIC_URL}/${mainLink}/${name.toLowerCase()}`}>
         {name}
@@ -113,8 +114,7 @@ const Navigation = ({
   fetchGenresStart,
   genresList,
   isGenresLoading,
-  getGenresName,
-  genreName
+  getNavItemName
 }) => {
   useEffect(() => {
     fetchGenresStart();
@@ -126,12 +126,7 @@ const Navigation = ({
         <Heading>Discover</Heading>
         <nav>
           <ul>
-            {renderNavigation(
-              stayInTouchItems,
-              'discover',
-              getGenresName,
-              genreName
-            )(MainLink)}
+            {renderNavigation(discover, 'discover', getNavItemName)(MainLink)}
           </ul>
         </nav>
       </Discover>
@@ -142,9 +137,7 @@ const Navigation = ({
             {isGenresLoading ? (
               <div>Loading...</div>
             ) : (
-              renderNavigation(genresList, 'genres', getGenresName, genreName)(
-                GenreLink
-              )
+              renderNavigation(genresList, 'genres', getNavItemName)(GenreLink)
             )}
           </ul>
         </nav>
@@ -155,14 +148,13 @@ const Navigation = ({
 
 const mapStateToProps = createStructuredSelector({
   genresList: selectGenresList,
-  isGenresLoading: selectIsGenresLoading,
-  genreName: selectGenreName
+  isGenresLoading: selectIsGenresLoading
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchGenresStart: () => dispatch(fetchGenresStart()),
-    getGenresName: name => dispatch(getGenresName(name))
+    getNavItemName: name => dispatch(getNavItemName(name))
   };
 };
 
