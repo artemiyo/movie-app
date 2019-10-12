@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import MoviesList from '../components/MoviesList';
@@ -15,17 +16,17 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Discover = ({ navItemName }) => {
+const Discover = ({ selectedMenu }) => {
   return (
     <div>
-      <Title>{navItemName}</Title>
+      <Title>{selectedMenu}</Title>
       <MoviesList />
     </div>
   );
 };
 
-const mapStateToProps = ({ navigation: { navItemName } }) => ({
-  navItemName
+const mapStateToProps = ({ navigation: { selectedMenu } }) => ({
+  selectedMenu
 });
 
-export default connect(mapStateToProps)(Discover);
+export default withRouter(connect(mapStateToProps)(Discover));

@@ -9,7 +9,8 @@ const Form = styled.form`
   width: 50rem;
   height: 4rem;
   border-radius: 3rem;
-  background-color: ${props => props.theme.colors.main};
+  /* background-color: ${props => props.theme.colors.main}; */
+	border: 1px solid ${props => props.theme.colors.main};
   opacity: 0.5;
   padding-left: 2rem;
 `;
@@ -22,16 +23,17 @@ const FormInput = styled.input`
   outline: none;
   padding-left: 1rem;
   font-family: 'Roboto', sans-serif;
+  color: ${props => props.theme.colors.main};
 
   &::placeholder {
-    color: ${props => props.theme.colors.sidebar};
+    color: ${props => props.theme.colors.main};
     font-family: 'Roboto', sans-serif;
   }
 `;
 
 const SearchIcon = styled(FontAwesomeIcon)`
   font-size: 1.4rem;
-  color: ${props => props.theme.colors.body};
+  color: ${props => props.theme.colors.main};
 `;
 
 // ========================== STYLES:END ========================== //

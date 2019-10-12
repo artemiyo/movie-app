@@ -1,10 +1,15 @@
 import navigationTypes from './navigationTypes';
 
 const INITIAL_STATE = {
-  isGenresLoading: true,
+  isLoading: true,
   genresList: [],
+  discoverList: [
+    { id: 1, name: 'Popular' },
+    { id: 2, name: 'Top Rated' },
+    { id: 3, name: 'Upcoming' }
+  ],
   errorMessage: '',
-  navItemName: 'Popular'
+  selectedMenu: 'Popular'
 };
 
 const navigationReducer = (state = INITIAL_STATE, action) => {
@@ -12,24 +17,24 @@ const navigationReducer = (state = INITIAL_STATE, action) => {
     case navigationTypes.FETCH_GENRES_START:
       return {
         ...state,
-        isGenresLoading: true
+        isLoading: true
       };
     case navigationTypes.FETCH_GENRES_SUCCESS:
       return {
         ...state,
-        isGenresLoading: false,
+        isLoading: false,
         genresList: action.payload
       };
     case navigationTypes.FETCH_GENRES_FAILURE:
       return {
         ...state,
-        isGenresLoading: false,
+        isLoading: false,
         errorMessage: action.payload
       };
-    case navigationTypes.GET_NAVIGATION_NAME:
+    case navigationTypes.GET_SELECTED_MENU:
       return {
         ...state,
-        navItemName: action.payload
+        selectedMenu: action.payload
       };
     default:
       return state;

@@ -12,7 +12,7 @@ const SidebarWrapper = styled.div`
   left: 0;
   height: 100%;
   width: 20%;
-  padding: 6rem 6rem 3rem 6rem;
+  padding: 5rem 5rem 3rem 5rem;
   background-color: ${props => props.theme.colors.sidebar};
   z-index: 1;
   overflow-x: hidden;

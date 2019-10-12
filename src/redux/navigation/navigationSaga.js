@@ -15,6 +15,7 @@ export function* fetchGenresAsync() {
     yield put(fetchGenressFailure(err));
   }
 }
+
 // Watcher Saga for getting genres
 export function* fetchGenresStart() {
   yield takeLatest(navigationTypes.FETCH_GENRES_START, fetchGenresAsync);

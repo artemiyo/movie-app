@@ -10,12 +10,18 @@ export const selectGenresList = createSelector(
 );
 
 // Memoized selector for the loading genres
-export const selectIsGenresLoading = createSelector(
+export const selectIsLoading = createSelector(
   [selectNavigation],
-  navigation => navigation.isGenresLoading
+  navigation => navigation.isLoading
 );
 
-export const selectNavItemName = createSelector(
+// Memoized selector for the list of discover
+export const selectDiscoverList = createSelector(
   [selectNavigation],
-  navigation => navigation.navItemName
+  navigation => navigation.discoverList
+);
+
+export const selectGetSelectedMenu = createSelector(
+  [selectNavigation],
+  navigation => navigation.selectedMenu
 );

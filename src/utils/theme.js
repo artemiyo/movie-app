@@ -4,7 +4,7 @@ const theme = {
     sidebar: '#19212A',
     body: '#141C25',
     hover: '#848EF2',
-    focus: '#848EF2',
+    selected: '#848EF2',
     gradient: '#848EF2',
     radial_1: '#000',
     radial_2: '#141C25'

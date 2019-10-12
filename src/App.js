@@ -18,7 +18,7 @@ const MainWrapper = styled.div`
 
 const MoviesWrapper = styled.div`
   width: 80%;
-  padding: 6rem;
+  padding: 5rem;
   background-color: ${props => props.theme.colors.body};
   margin-left: 20%;
 `;
@@ -26,7 +26,7 @@ const MoviesWrapper = styled.div`
 const SearchPanel = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 6rem;
+  margin-bottom: 5rem;
 `;
 // ========================== STYLES:END ========================== //
 

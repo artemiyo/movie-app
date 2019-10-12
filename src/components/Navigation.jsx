@@ -3,17 +3,19 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
-import { stayInTouchItems as discover } from '../utils/data';
 
 import {
   selectGenresList,
-  selectIsGenresLoading
+  selectIsLoading,
+  selectDiscoverList,
+  selectGetSelectedMenu
 } from '../redux/navigation/navigationSelectors';
 
 import {
   fetchGenresStart,
-  getNavItemName
+  getSelectedMenu
 } from '../redux/navigation/navigationActions';
+import Loader from './Loader';
 
 // ========================== STYLES:BEGIN ========================== //
 const Heading = styled.h5`
@@ -33,6 +35,10 @@ const Links = styled(Link)`
   }
 `;
 
+const NavigationWrapper = styled.div`
+  position: relative;
+`;
+
 const Discover = styled.div`
   margin: 4rem 0;
 `;
@@ -43,16 +49,22 @@ const NavListItem = styled.li`
   cursor: pointer;
 
   &:hover:after {
-    width: 70%;
+    width: 80%;
   }
 
   &::after {
     position: absolute;
     content: '';
     bottom: -40%;
-    left: -23%;
-    width: 0%;
-    height: 200%;
+    left: -25%;
+    width: ${props => {
+      if (props.selected === props.name) {
+        return '80%';
+      } else {
+        return 0;
+      }
+    }};
+    height: 175%;
     z-index: -1;
     background: linear-gradient(
       to right,
@@ -72,7 +84,7 @@ const NavListItem = styled.li`
   }
 
   &:not(:last-child) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
   }
 `;
 
@@ -98,10 +110,15 @@ const GenreLink = styled(Links)`
 const renderNavigation = (
   categories,
   mainLink,
-  getNavItemName
+  getSelectedMenu,
+  selectedMenu
 ) => LinkWrapper => {
   return categories.map(({ name, id }) => (
-    <NavListItem key={id} onClick={() => getNavItemName(name)}>
+    <NavListItem
+      selected={selectedMenu}
+      name={name}
+      key={id}
+      onClick={() => getSelectedMenu(name)}>
       <LinkWrapper
         to={`${process.env.PUBLIC_URL}/${mainLink}/${name.toLowerCase()}`}>
         {name}
@@ -113,20 +130,29 @@ const renderNavigation = (
 const Navigation = ({
   fetchGenresStart,
   genresList,
-  isGenresLoading,
-  getNavItemName
+  discoverList,
+  isLoading,
+  getSelectedMenu,
+  selectedMenu
 }) => {
   useEffect(() => {
     fetchGenresStart();
   }, [fetchGenresStart]);
 
-  return (
-    <div>
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <NavigationWrapper>
       <Discover>
         <Heading>Discover</Heading>
         <nav>
           <ul>
-            {renderNavigation(discover, 'discover', getNavItemName)(MainLink)}
+            {renderNavigation(
+              discoverList,
+              'discover',
+              getSelectedMenu,
+              selectedMenu
+            )(MainLink)}
           </ul>
         </nav>
       </Discover>
@@ -134,27 +160,30 @@ const Navigation = ({
         <Heading>Genres</Heading>
         <nav>
           <ul>
-            {isGenresLoading ? (
-              <div>Loading...</div>
-            ) : (
-              renderNavigation(genresList, 'genres', getNavItemName)(GenreLink)
-            )}
+            {renderNavigation(
+              genresList,
+              'genres',
+              getSelectedMenu,
+              selectedMenu
+            )(GenreLink)}
           </ul>
         </nav>
       </div>
-    </div>
+    </NavigationWrapper>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
   genresList: selectGenresList,
-  isGenresLoading: selectIsGenresLoading
+  discoverList: selectDiscoverList,
+  isLoading: selectIsLoading,
+  selectedMenu: selectGetSelectedMenu
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchGenresStart: () => dispatch(fetchGenresStart()),
-    getNavItemName: name => dispatch(getNavItemName(name))
+    getSelectedMenu: name => dispatch(getSelectedMenu(name))
   };
 };
 

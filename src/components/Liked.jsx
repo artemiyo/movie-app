@@ -8,6 +8,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 const HeartIcon = styled(FontAwesomeIcon)`
   font-size: 2.5rem;
   cursor: pointer;
+  opacity: 0.5;
   transition: all 0.3 ease;
 
   &:hover {

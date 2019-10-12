@@ -17,7 +17,7 @@ export const fetchGenressFailure = errorMessage => ({
   payload: errorMessage
 });
 
-export const getNavItemName = name => ({
-  type: navigationTypes.GET_NAVIGATION_NAME,
+export const getSelectedMenu = name => ({
+  type: navigationTypes.GET_SELECTED_MENU,
   payload: name
 });

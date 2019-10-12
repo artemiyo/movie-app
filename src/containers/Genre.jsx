@@ -15,17 +15,17 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Discover = ({ navItemName }) => {
+const Discover = ({ selectedMenu }) => {
   return (
     <div>
-      <Title>{navItemName}</Title>
+      <Title>{selectedMenu}</Title>
       <MoviesList />
     </div>
   );
 };
 
-const mapStateToProps = ({ navigation: { navItemName } }) => ({
-  navItemName
+const mapStateToProps = ({ navigation: { selectedMenu } }) => ({
+  selectedMenu
 });
 
 export default connect(mapStateToProps)(Discover);
