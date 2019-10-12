@@ -52,15 +52,19 @@ const Rating = styled.span`
 
 // ========================== STYLES:END ========================== //
 
-const MoviesItem = ({ imgUrl }) => {
+const MoviesItem = ({ movie }) => {
+  const { title, vote_average, poster_path } = movie;
   return (
     <MovieLink to='/'>
-      <MovieImage src={imgUrl} alt='Title' />
+      <MovieImage
+        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        alt={title}
+      />
       <MovieDetails>
-        <MovieTitle>Title of the Movie</MovieTitle>
+        <MovieTitle>{title}</MovieTitle>
         <Rating>
           <Icon icon={faStar} />
-          7.4
+          {vote_average}
         </Rating>
       </MovieDetails>
     </MovieLink>

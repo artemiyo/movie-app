@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import {
   selectGenresList,
-  selectIsLoading,
+  selectIsNavigationLoading,
   selectDiscoverList,
   selectGetSelectedMenu
 } from '../redux/navigation/navigationSelectors';
@@ -131,7 +131,7 @@ const Navigation = ({
   fetchGenresStart,
   genresList,
   discoverList,
-  isLoading,
+  isNavigationLoading,
   getSelectedMenu,
   selectedMenu
 }) => {
@@ -139,7 +139,7 @@ const Navigation = ({
     fetchGenresStart();
   }, [fetchGenresStart]);
 
-  return isLoading ? (
+  return isNavigationLoading ? (
     <Loader />
   ) : (
     <NavigationWrapper>
@@ -176,7 +176,7 @@ const Navigation = ({
 const mapStateToProps = createStructuredSelector({
   genresList: selectGenresList,
   discoverList: selectDiscoverList,
-  isLoading: selectIsLoading,
+  isNavigationLoading: selectIsNavigationLoading,
   selectedMenu: selectGetSelectedMenu
 });
 

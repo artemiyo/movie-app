@@ -21,6 +21,7 @@ const MoviesWrapper = styled.div`
   padding: 5rem;
   background-color: ${props => props.theme.colors.body};
   margin-left: 20%;
+  position: relative;
 `;
 
 const SearchPanel = styled.div`

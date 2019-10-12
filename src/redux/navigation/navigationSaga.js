@@ -1,16 +1,19 @@
 import { takeLatest, all, put, call } from 'redux-saga/effects';
 
+import tmdb from '../../api/tmdb';
+
 import { fetchGenresSuccess, fetchGenressFailure } from './navigationActions';
 import navigationTypes from './navigationTypes';
 
 // Worker Saga for getting genres
 export function* fetchGenresAsync() {
+  const response = yield tmdb.get('/genre/movie/list', {
+    params: {
+      api_key: process.env.REACT_APP_KEY
+    }
+  });
   try {
-    const response = yield fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_KEY}`
-    );
-    const data = yield response.json();
-    yield put(fetchGenresSuccess(data));
+    yield put(fetchGenresSuccess(response.data));
   } catch (err) {
     yield put(fetchGenressFailure(err));
   }

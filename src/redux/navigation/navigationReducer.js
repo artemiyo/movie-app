@@ -1,7 +1,7 @@
 import navigationTypes from './navigationTypes';
 
 const INITIAL_STATE = {
-  isLoading: true,
+  isNavigationLoading: true,
   genresList: [],
   discoverList: [
     { id: 1, name: 'Popular' },
@@ -17,18 +17,18 @@ const navigationReducer = (state = INITIAL_STATE, action) => {
     case navigationTypes.FETCH_GENRES_START:
       return {
         ...state,
-        isLoading: true
+        isNavigationLoading: true
       };
     case navigationTypes.FETCH_GENRES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isNavigationLoading: false,
         genresList: action.payload
       };
     case navigationTypes.FETCH_GENRES_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isNavigationLoading: false,
         errorMessage: action.payload
       };
     case navigationTypes.GET_SELECTED_MENU:

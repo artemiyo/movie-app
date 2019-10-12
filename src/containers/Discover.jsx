@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import MoviesList from '../components/MoviesList';
+
+import { fetchMoviesStart } from '../redux/movies/moviesActions';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -16,7 +18,10 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Discover = ({ selectedMenu }) => {
+const Discover = ({ selectedMenu, fetchMoviesStart }) => {
+  useEffect(() => {
+    fetchMoviesStart();
+  }, [fetchMoviesStart]);
   return (
     <div>
       <Title>{selectedMenu}</Title>
@@ -25,8 +30,13 @@ const Discover = ({ selectedMenu }) => {
   );
 };
 
-const mapStateToProps = ({ navigation: { selectedMenu } }) => ({
-  selectedMenu
+const mapStateToProps = ({ navigation }) => ({
+  selectedMenu: navigation.selectedMenu
 });
 
-export default withRouter(connect(mapStateToProps)(Discover));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { fetchMoviesStart }
+  )(Discover)
+);
