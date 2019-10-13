@@ -18,13 +18,14 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Discover = ({ selectedMenu, fetchMoviesStart, match }) => {
+const Discover = ({ selectedMenu, fetchMoviesStart }) => {
   useEffect(() => {
     fetchMoviesStart();
-  }, [fetchMoviesStart]);
+    return () => fetchMoviesStart();
+  });
   return (
     <div>
-      <Title>{match.params.name}</Title>
+      <Title>{selectedMenu}</Title>
       <MoviesList />
     </div>
   );
