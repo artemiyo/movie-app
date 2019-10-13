@@ -11,7 +11,8 @@ export function* fetchMoviesAsync() {
     .replace(' ', '_');
   const response = yield tmdb.get(`/movie/${movieCategory}/`, {
     params: {
-      api_key: process.env.REACT_APP_KEY
+      api_key: process.env.REACT_APP_KEY,
+      page: 1
     }
   });
   try {

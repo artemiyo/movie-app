@@ -14,7 +14,7 @@ const MovieLink = styled(Link)`
     color: ${props => props.theme.colors.main};
     text-decoration: none;
     transition: all 0.3s ease;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
   }
 
   &:hover {
@@ -36,9 +36,9 @@ const MovieDetails = styled.div`
 `;
 
 const MovieTitle = styled.h3`
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -57,7 +57,11 @@ const MoviesItem = ({ movie }) => {
   return (
     <MovieLink to='/'>
       <MovieImage
-        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        src={
+          poster_path
+            ? `https://image.tmdb.org/t/p/w500${poster_path}`
+            : 'http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png'
+        }
         alt={title}
       />
       <MovieDetails>
