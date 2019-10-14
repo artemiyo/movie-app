@@ -10,6 +10,8 @@ import {
   selectGetSelectedMenu
 } from '../redux/navigation/navigationSelectors';
 
+import { getMenuId } from '../redux/navigation/navigationActions';
+
 // ========================== STYLES:BEGIN ========================== //
 const Heading = styled.h5`
   font-size: 1.2rem;
@@ -103,10 +105,15 @@ const GenreLink = styled(Links)`
 const renderNavigation = (
   categories,
   mainLink,
-  selectedMenu
+  selectedMenu,
+  getMenuId
 ) => LinkWrapper => {
   return categories.map(({ name, id }) => (
-    <NavListItem selected={selectedMenu} name={name} key={id}>
+    <NavListItem
+      selected={selectedMenu}
+      name={name}
+      key={id}
+      onClick={() => getMenuId(id)}>
       <LinkWrapper
         to={`${process.env.PUBLIC_URL}/${mainLink}/${name.toLowerCase()}`}>
         {name}
@@ -115,16 +122,19 @@ const renderNavigation = (
   ));
 };
 
-const Navigation = ({ genresList, discoverList, selectedMenu }) => {
+const Navigation = ({ genresList, discoverList, selectedMenu, getMenuId }) => {
   return (
     <NavigationWrapper>
       <Discover>
         <Heading>Discover</Heading>
         <nav>
           <ul>
-            {renderNavigation(discoverList, 'discover', selectedMenu)(
-              DiscoverLink
-            )}
+            {renderNavigation(
+              discoverList,
+              'discover',
+              selectedMenu,
+              getMenuId
+            )(DiscoverLink)}
           </ul>
         </nav>
       </Discover>
@@ -132,7 +142,9 @@ const Navigation = ({ genresList, discoverList, selectedMenu }) => {
         <Heading>Genres</Heading>
         <nav>
           <ul>
-            {renderNavigation(genresList, 'genres', selectedMenu)(GenreLink)}
+            {renderNavigation(genresList, 'genres', selectedMenu, getMenuId)(
+              GenreLink
+            )}
           </ul>
         </nav>
       </div>
@@ -146,4 +158,9 @@ const mapStateToProps = createStructuredSelector({
   selectedMenu: selectGetSelectedMenu
 });
 
-export default withRouter(connect(mapStateToProps)(Navigation));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getMenuId }
+  )(Navigation)
+);

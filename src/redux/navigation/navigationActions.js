@@ -21,3 +21,8 @@ export const getSelectedMenu = name => ({
   type: navigationTypes.GET_SELECTED_MENU,
   payload: name
 });
+
+export const getMenuId = id => ({
+  type: navigationTypes.GET_MENU_ID,
+  payload: id
+});

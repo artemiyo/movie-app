@@ -37,7 +37,7 @@ const MovieLink = styled(Link)`
     color: ${props => props.theme.colors.main};
     text-decoration: none;
     margin-bottom: 4rem;
-    animation: ${fadeIn} 0.6s;
+    animation: ${fadeIn} 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
     animation-delay: ${props => `${0.03 * props.idx}s`};
     transition: all 0.3s ease;
   }

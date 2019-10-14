@@ -6,6 +6,8 @@ import { createStructuredSelector } from 'reselect';
 
 import MoviesList from '../components/MoviesList';
 
+import { fetchMoviesByGenresStart } from '../redux/movies/moviesActions';
+
 import { getSelectedMenu } from '../redux/navigation/navigationActions';
 import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
 
@@ -20,9 +22,15 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Genre = ({ selectedMenu, getSelectedMenu, match }) => {
+const Genre = ({
+  selectedMenu,
+  getSelectedMenu,
+  fetchMoviesByGenresStart,
+  match
+}) => {
   useEffect(() => {
     getSelectedMenu(match.params.name);
+    fetchMoviesByGenresStart();
   }, [match.params.name]);
   return (
     <div>
@@ -39,6 +47,6 @@ const mapStateToProps = createStructuredSelector({
 export default withRouter(
   connect(
     mapStateToProps,
-    { getSelectedMenu }
+    { getSelectedMenu, fetchMoviesByGenresStart }
   )(Genre)
 );

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import navigationTypes from './navigationTypes';
 
 // Getting genres from state
 const selectNavigation = state => state.navigation;
@@ -24,4 +25,9 @@ export const selectDiscoverList = createSelector(
 export const selectGetSelectedMenu = createSelector(
   [selectNavigation],
   navigation => navigation.selectedMenu
+);
+
+export const selectMenuId = createSelector(
+  [selectNavigation],
+  navigation => navigation.menuId
 );
