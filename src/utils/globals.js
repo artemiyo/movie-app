@@ -20,5 +20,4 @@ export default createGlobalStyle`
 		letter-spacing: 0.2em;
 		color: ${props => props.theme.colors.main};
 	}
-
 `;

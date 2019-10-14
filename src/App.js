@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Sidebar from './containers/Sidebar';
 import Search from './components/Search';
 import Liked from './components/Liked';
+import Loader from './components/Loader';
 
 import Discover from './containers/Discover';
 import Genre from './containers/Genre';
+
+import { fetchGenresStart } from './redux/navigation/navigationActions';
+
+import { selectIsNavigationLoading } from './redux/navigation/navigationSelectors';
 
 // ========================== STYLES:BEGIN ========================== //
 const MainWrapper = styled.div`
   height: 100%;
   display: flex;
-  position: relative;
+  justify-content: center;
+  align-items: center;
+  background: ${props => props.theme.colors.body};
 `;
 
 const MoviesWrapper = styled.div`
@@ -31,8 +40,16 @@ const SearchPanel = styled.div`
 `;
 // ========================== STYLES:END ========================== //
 
-function App() {
-  return (
+function App({ isLoading, fetchGenresStart }) {
+  useEffect(() => {
+    fetchGenresStart();
+  }, []);
+
+  return isLoading ? (
+    <MainWrapper>
+      <Loader />
+    </MainWrapper>
+  ) : (
     <div className='App'>
       <MainWrapper>
         <Sidebar />
@@ -67,4 +84,11 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  isLoading: selectIsNavigationLoading
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchGenresStart }
+)(App);

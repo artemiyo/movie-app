@@ -27,8 +27,8 @@ const MoviesList = ({ movies, isMoviesLoading }) => {
     <Loader />
   ) : (
     <MovieList>
-      {movies.results.map(movie => (
-        <MovieItem key={movie.id} movie={movie} />
+      {movies.results.map((movie, idx) => (
+        <MovieItem key={movie.id} movie={movie} idx={idx} />
       ))}
     </MovieList>
   );

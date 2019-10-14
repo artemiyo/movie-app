@@ -1,10 +1,33 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 // ========================== STYLES:BEGIN ========================== //
+
+const fadeIn = keyframes`
+	0% {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+	20% {
+		opacity: 0.2
+	}
+	40% {
+		opacity: 0.4
+	}
+	60% {
+		opacity: 0.6
+	}
+	80% {
+		opacity: 0.8
+	}
+	100% {
+		opacity: 1
+		transform: translateY(0);
+	}
+`;
 
 const MovieLink = styled(Link)`
   &:link,
@@ -13,8 +36,10 @@ const MovieLink = styled(Link)`
     max-width: 25rem;
     color: ${props => props.theme.colors.main};
     text-decoration: none;
-    transition: all 0.3s ease;
     margin-bottom: 4rem;
+    animation: ${fadeIn} 0.6s;
+    animation-delay: ${props => `${0.03 * props.idx}s`};
+    transition: all 0.3s ease;
   }
 
   &:hover {
@@ -52,10 +77,10 @@ const Rating = styled.span`
 
 // ========================== STYLES:END ========================== //
 
-const MoviesItem = ({ movie }) => {
+const MoviesItem = ({ movie, idx }) => {
   const { title, vote_average, poster_path } = movie;
   return (
-    <MovieLink to='/'>
+    <MovieLink idx={idx} to='/'>
       <MovieImage
         src={
           poster_path

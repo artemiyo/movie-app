@@ -11,15 +11,21 @@ const roller = keyframes`
 `;
 
 const LoaderWrapper = styled.div`
-  position: absolute;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: ${props => props.theme.colors.body};
 `;
 
 const RollerMain = styled.div`
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 6.4rem;
   height: 6.4rem;
 

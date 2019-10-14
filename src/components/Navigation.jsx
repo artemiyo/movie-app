@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -6,16 +6,9 @@ import styled from 'styled-components';
 
 import {
   selectGenresList,
-  selectIsNavigationLoading,
   selectDiscoverList,
   selectGetSelectedMenu
 } from '../redux/navigation/navigationSelectors';
-
-import {
-  fetchGenresStart,
-  getSelectedMenu
-} from '../redux/navigation/navigationActions';
-import Loader from './Loader';
 
 // ========================== STYLES:BEGIN ========================== //
 const Heading = styled.h5`
@@ -58,7 +51,7 @@ const NavListItem = styled.li`
     bottom: -40%;
     left: -25%;
     width: ${props => {
-      if (props.selected === props.name) {
+      if (props.selected === props.name.toLowerCase()) {
         return '80%';
       } else {
         return 0;
@@ -88,7 +81,7 @@ const NavListItem = styled.li`
   }
 `;
 
-const MainLink = styled(Links)`
+const DiscoverLink = styled(Links)`
   &:link,
   &:visited {
     font-size: 1.6rem;
@@ -110,15 +103,10 @@ const GenreLink = styled(Links)`
 const renderNavigation = (
   categories,
   mainLink,
-  getSelectedMenu,
   selectedMenu
 ) => LinkWrapper => {
   return categories.map(({ name, id }) => (
-    <NavListItem
-      selected={selectedMenu}
-      name={name}
-      key={id}
-      onClick={() => getSelectedMenu(name)}>
+    <NavListItem selected={selectedMenu} name={name} key={id}>
       <LinkWrapper
         to={`${process.env.PUBLIC_URL}/${mainLink}/${name.toLowerCase()}`}>
         {name}
@@ -127,32 +115,16 @@ const renderNavigation = (
   ));
 };
 
-const Navigation = ({
-  fetchGenresStart,
-  genresList,
-  discoverList,
-  isNavigationLoading,
-  getSelectedMenu,
-  selectedMenu
-}) => {
-  useEffect(() => {
-    fetchGenresStart();
-  }, [fetchGenresStart]);
-
-  return isNavigationLoading ? (
-    <Loader />
-  ) : (
+const Navigation = ({ genresList, discoverList, selectedMenu }) => {
+  return (
     <NavigationWrapper>
       <Discover>
         <Heading>Discover</Heading>
         <nav>
           <ul>
-            {renderNavigation(
-              discoverList,
-              'discover',
-              getSelectedMenu,
-              selectedMenu
-            )(MainLink)}
+            {renderNavigation(discoverList, 'discover', selectedMenu)(
+              DiscoverLink
+            )}
           </ul>
         </nav>
       </Discover>
@@ -160,12 +132,7 @@ const Navigation = ({
         <Heading>Genres</Heading>
         <nav>
           <ul>
-            {renderNavigation(
-              genresList,
-              'genres',
-              getSelectedMenu,
-              selectedMenu
-            )(GenreLink)}
+            {renderNavigation(genresList, 'genres', selectedMenu)(GenreLink)}
           </ul>
         </nav>
       </div>
@@ -176,20 +143,7 @@ const Navigation = ({
 const mapStateToProps = createStructuredSelector({
   genresList: selectGenresList,
   discoverList: selectDiscoverList,
-  isNavigationLoading: selectIsNavigationLoading,
   selectedMenu: selectGetSelectedMenu
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchGenresStart: () => dispatch(fetchGenresStart()),
-    getSelectedMenu: name => dispatch(getSelectedMenu(name))
-  };
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Navigation)
-);
+export default withRouter(connect(mapStateToProps)(Navigation));

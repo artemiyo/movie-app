@@ -2,10 +2,14 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { createStructuredSelector } from 'reselect';
 
 import MoviesList from '../components/MoviesList';
 
+import { getSelectedMenu } from '../redux/navigation/navigationActions';
 import { fetchMoviesStart } from '../redux/movies/moviesActions';
+
+import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -18,11 +22,17 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Discover = ({ selectedMenu, fetchMoviesStart }) => {
+const Discover = ({
+  selectedMenu,
+  fetchMoviesStart,
+  match,
+  getSelectedMenu
+}) => {
   useEffect(() => {
+    getSelectedMenu(match.params.name);
     fetchMoviesStart();
-    return () => fetchMoviesStart();
-  });
+  }, [match.params.name]);
+
   return (
     <div>
       <Title>{selectedMenu}</Title>
@@ -31,13 +41,13 @@ const Discover = ({ selectedMenu, fetchMoviesStart }) => {
   );
 };
 
-const mapStateToProps = ({ navigation }) => ({
-  selectedMenu: navigation.selectedMenu
+const mapStateToProps = createStructuredSelector({
+  selectedMenu: selectGetSelectedMenu
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchMoviesStart }
+    { fetchMoviesStart, getSelectedMenu }
   )(Discover)
 );

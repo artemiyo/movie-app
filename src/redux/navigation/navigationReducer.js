@@ -9,7 +9,7 @@ const INITIAL_STATE = {
     { id: 3, name: 'Upcoming' }
   ],
   errorMessage: '',
-  selectedMenu: 'Popular'
+  selectedMenu: ''
 };
 
 const navigationReducer = (state = INITIAL_STATE, action) => {

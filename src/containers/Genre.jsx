@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { createStructuredSelector } from 'reselect';
 
 import MoviesList from '../components/MoviesList';
+
+import { getSelectedMenu } from '../redux/navigation/navigationActions';
+import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -15,7 +20,10 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Discover = ({ selectedMenu }) => {
+const Genre = ({ selectedMenu, getSelectedMenu, match }) => {
+  useEffect(() => {
+    getSelectedMenu(match.params.name);
+  }, [match.params.name]);
   return (
     <div>
       <Title>{selectedMenu}</Title>
@@ -24,8 +32,13 @@ const Discover = ({ selectedMenu }) => {
   );
 };
 
-const mapStateToProps = ({ navigation: { selectedMenu } }) => ({
-  selectedMenu
+const mapStateToProps = createStructuredSelector({
+  selectedMenu: selectGetSelectedMenu
 });
 
-export default connect(mapStateToProps)(Discover);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getSelectedMenu }
+  )(Genre)
+);
