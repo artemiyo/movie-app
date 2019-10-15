@@ -51,17 +51,18 @@ const MovieLink = styled(Link)`
 
 const MovieImage = styled.img`
   width: 100%;
-  height: 37rem;
-  transition: all 0.3s ease;
+  height: 35rem;
 `;
 
 const MovieDetails = styled.div`
-  text-align: center;
-  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 1rem 0;
 `;
 
 const MovieTitle = styled.h3`
-  font-size: 1.6rem;
+  width: 70%;
+  font-size: 1.4rem;
   font-weight: 400;
   margin-bottom: 1.5rem;
 `;

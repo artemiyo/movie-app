@@ -9,6 +9,7 @@ import {
 } from './moviesActions';
 import moviesTypes from './moviesTypes';
 
+// Fetch movies by discover category
 export function* fetchMoviesAsync() {
   const getState = yield select();
   const movieCategory = getState.navigation.selectedMenu
@@ -27,6 +28,7 @@ export function* fetchMoviesAsync() {
   }
 }
 
+// Fetch movies by genre
 export function* fetchMoviesByGenresAsync() {
   const getState = yield select();
   const genresList = getState.navigation.genresList.genres;

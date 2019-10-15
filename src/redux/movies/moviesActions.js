@@ -1,5 +1,7 @@
 import moviesTypes from './moviesTypes';
 
+// Actions for fetching movies by discover category
+
 export const fetchMoviesStart = () => ({
   type: moviesTypes.FETCH_MOVIES_START
 });
@@ -14,6 +16,7 @@ export const fetchMoviesFailure = errorMessage => ({
   payload: errorMessage
 });
 
+// Actions for fetching movies by genres
 export const fetchMoviesByGenresStart = () => ({
   type: moviesTypes.FETCH_MOVIES_GENRES_START
 });

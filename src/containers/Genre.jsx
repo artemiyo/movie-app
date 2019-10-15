@@ -31,6 +31,7 @@ const Genre = ({
   useEffect(() => {
     getSelectedMenu(match.params.name);
     fetchMoviesByGenresStart();
+    return () => getSelectedMenu();
   }, [match.params.name]);
   return (
     <div>

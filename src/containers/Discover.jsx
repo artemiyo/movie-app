@@ -31,6 +31,7 @@ const Discover = ({
   useEffect(() => {
     getSelectedMenu(match.params.name);
     fetchMoviesStart();
+    return () => getSelectedMenu();
   }, [match.params.name]);
 
   return (

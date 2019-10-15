@@ -30,7 +30,11 @@ const MoviesWrapper = styled.div`
   padding: 5rem;
   background-color: ${props => props.theme.colors.body};
   margin-left: 20%;
+`;
+
+const MoviesListWrapper = styled.div`
   position: relative;
+  min-height: 100vh;
 `;
 
 const SearchPanel = styled.div`
@@ -58,26 +62,28 @@ function App({ isLoading, fetchGenresStart }) {
             <Search />
             <Liked />
           </SearchPanel>
-          <Switch>
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/`}
-              render={() => (
-                <Redirect
-                  from={`${process.env.PUBLIC_URL}/`}
-                  to={`${process.env.PUBLIC_URL}/discover/popular`}
-                />
-              )}
-            />
-            <Route
-              path={`${process.env.PUBLIC_URL}/discover/:name`}
-              component={Discover}
-            />
-            <Route
-              path={`${process.env.PUBLIC_URL}/genres/:name`}
-              component={Genre}
-            />
-          </Switch>
+          <MoviesListWrapper>
+            <Switch>
+              <Route
+                exact
+                path={`${process.env.PUBLIC_URL}/`}
+                render={() => (
+                  <Redirect
+                    from={`${process.env.PUBLIC_URL}/`}
+                    to={`${process.env.PUBLIC_URL}/discover/popular`}
+                  />
+                )}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL}/discover/:name`}
+                component={Discover}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL}/genres/:name`}
+                component={Genre}
+              />
+            </Switch>
+          </MoviesListWrapper>
         </MoviesWrapper>
       </MainWrapper>
     </div>

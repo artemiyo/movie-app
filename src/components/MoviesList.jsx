@@ -10,6 +10,7 @@ import {
   selectMoviesList,
   selectIsMoviesLoading
 } from '../redux/movies/moviesSelectors';
+import Pagination from './Pagination';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -30,6 +31,7 @@ const MoviesList = ({ movies, isMoviesLoading }) => {
       {movies.results.map((movie, idx) => (
         <MovieItem key={movie.id} movie={movie} idx={idx} />
       ))}
+      <Pagination movies={movies} />
     </MovieList>
   );
 };
