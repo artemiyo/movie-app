@@ -25,7 +25,6 @@ const PaginationWrapper = styled.div`
 
 const Pagination = ({ movies }) => {
   const { page, total_pages } = movies;
-  console.log(page, total_pages);
 
   if (total_pages === 1) {
     return null;
@@ -35,7 +34,7 @@ const Pagination = ({ movies }) => {
     return (
       <PaginationWrapper type='next'>
         <Link to={`${process.env.PUBLIC_URL}?page=${page + 1}`}>
-          <Button>Page {page + 1}</Button>
+          <Button>Next Page</Button>
         </Link>
       </PaginationWrapper>
     );
@@ -43,10 +42,10 @@ const Pagination = ({ movies }) => {
     return (
       <PaginationWrapper>
         <Link to={`${process.env.PUBLIC_URL}?page=${page - 1}`}>
-          <Button>Page {page - 1}</Button>
+          <Button>Prev Page</Button>
         </Link>
         <Link to={`${process.env.PUBLIC_URL}?page=${page + 1}`}>
-          <Button>Page {page + 1}</Button>
+          <Button>Next Page</Button>
         </Link>
       </PaginationWrapper>
     );
@@ -54,7 +53,7 @@ const Pagination = ({ movies }) => {
     return (
       <PaginationWrapper type='prev'>
         <Link to={`${process.env.PUBLIC_URL}?page=${page - 1}`}>
-          <Button>Page {page - 1}</Button>
+          <Button>Prev Page</Button>
         </Link>
       </PaginationWrapper>
     );
