@@ -6,29 +6,6 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 // ========================== STYLES:BEGIN ========================== //
 
-const fadeIn = keyframes`
-	0% {
-		opacity: 0;
-		transform: translateY(100%);
-	}
-	20% {
-		opacity: 0.2
-	}
-	40% {
-		opacity: 0.4
-	}
-	60% {
-		opacity: 0.6
-	}
-	80% {
-		opacity: 0.8
-	}
-	100% {
-		opacity: 1
-		transform: translateY(0);
-	}
-`;
-
 const MovieLink = styled(Link)`
   &:link,
   &:visited {
@@ -37,8 +14,6 @@ const MovieLink = styled(Link)`
     color: ${props => props.theme.colors.main};
     text-decoration: none;
     margin-bottom: 4rem;
-    animation: ${fadeIn} 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-    animation-delay: ${props => `${0.03 * props.idx}s`};
     transition: all 0.3s ease;
   }
 
@@ -78,10 +53,10 @@ const Rating = styled.span`
 
 // ========================== STYLES:END ========================== //
 
-const MoviesItem = ({ movie, idx }) => {
+const MoviesItem = ({ movie }) => {
   const { title, vote_average, poster_path } = movie;
   return (
-    <MovieLink idx={idx} to='/'>
+    <MovieLink to='/'>
       <MovieImage
         src={
           poster_path
