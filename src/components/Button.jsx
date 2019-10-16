@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// ========================== STYLES:BEGIN ========================== //
+
 const ButtonContainer = styled.button`
   font-family: 'Roboto', sans-serif;
   width: 11rem;
@@ -15,6 +17,8 @@ const ButtonContainer = styled.button`
     transform: scale(1.05);
   }
 `;
+
+// ========================== STYLES:END ========================== //
 
 const Button = ({ children }) => <ButtonContainer>{children}</ButtonContainer>;
 

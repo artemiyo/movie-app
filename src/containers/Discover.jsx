@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
+import queryString from 'query-string';
 
 import MoviesList from '../components/MoviesList';
 
@@ -10,6 +11,7 @@ import { getSelectedMenu } from '../redux/navigation/navigationActions';
 import { fetchMoviesStart } from '../redux/movies/moviesActions';
 
 import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
+import Pagination from '../components/Pagination';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -26,13 +28,15 @@ const Discover = ({
   selectedMenu,
   fetchMoviesStart,
   match,
+  location,
   getSelectedMenu
 }) => {
+  const params = queryString.parse(location.search);
   useEffect(() => {
     getSelectedMenu(match.params.name);
-    fetchMoviesStart();
+    fetchMoviesStart(params.page);
     return () => getSelectedMenu();
-  }, [match.params.name]);
+  }, [match.params.name, params.page]);
 
   return (
     <div>

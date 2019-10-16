@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
-
+import queryString from 'query-string';
 import MoviesList from '../components/MoviesList';
 
 import { fetchMoviesByGenresStart } from '../redux/movies/moviesActions';
@@ -26,13 +26,15 @@ const Genre = ({
   selectedMenu,
   getSelectedMenu,
   fetchMoviesByGenresStart,
-  match
+  match,
+  location
 }) => {
+  const params = queryString.parse(location.search);
   useEffect(() => {
     getSelectedMenu(match.params.name);
-    fetchMoviesByGenresStart();
+    fetchMoviesByGenresStart(params.page);
     return () => getSelectedMenu();
-  }, [match.params.name]);
+  }, [match.params.name, params.page]);
   return (
     <div>
       <Title>{selectedMenu}</Title>

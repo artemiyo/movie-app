@@ -15,10 +15,11 @@ export function* fetchMoviesAsync() {
   const movieCategory = getState.navigation.selectedMenu
     .toLowerCase()
     .replace(' ', '_');
+  const page = getState.movies.page;
   const response = yield tmdb.get(`/movie/${movieCategory}/`, {
     params: {
       api_key: process.env.REACT_APP_KEY,
-      page: 1
+      page: page
     }
   });
   try {
@@ -33,6 +34,7 @@ export function* fetchMoviesByGenresAsync() {
   const getState = yield select();
   const genresList = getState.navigation.genresList.genres;
   const selectedMenu = getState.navigation.selectedMenu;
+  const page = getState.movies.page;
   const genreId = genresList
     .filter(el => el.name.toLowerCase() === selectedMenu)
     .map(el => el.id)
@@ -42,7 +44,7 @@ export function* fetchMoviesByGenresAsync() {
     params: {
       api_key: process.env.REACT_APP_KEY,
       with_genres: genreId,
-      page: 1
+      page: page
     }
   });
 

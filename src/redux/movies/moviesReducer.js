@@ -3,7 +3,8 @@ import moviesTypes from './moviesTypes';
 const INITIAL_STATE = {
   isMoviesLoading: true,
   moviesList: [],
-  errorMessage: ''
+  errorMessage: '',
+  page: 1
 };
 
 const moviesReducer = (state = INITIAL_STATE, action) => {
@@ -12,7 +13,8 @@ const moviesReducer = (state = INITIAL_STATE, action) => {
     case moviesTypes.FETCH_MOVIES_GENRES_START:
       return {
         ...state,
-        isMoviesLoading: true
+        isMoviesLoading: true,
+        page: action.payload
       };
     case moviesTypes.FETCH_MOVIES_SUCCESS:
     case moviesTypes.FETCH_MOVIES_GENRES_SUCCESS:

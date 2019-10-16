@@ -2,8 +2,9 @@ import moviesTypes from './moviesTypes';
 
 // Actions for fetching movies by discover category
 
-export const fetchMoviesStart = () => ({
-  type: moviesTypes.FETCH_MOVIES_START
+export const fetchMoviesStart = page => ({
+  type: moviesTypes.FETCH_MOVIES_START,
+  payload: page
 });
 
 export const fetchMoviesSuccess = moviesList => ({
@@ -17,8 +18,9 @@ export const fetchMoviesFailure = errorMessage => ({
 });
 
 // Actions for fetching movies by genres
-export const fetchMoviesByGenresStart = () => ({
-  type: moviesTypes.FETCH_MOVIES_GENRES_START
+export const fetchMoviesByGenresStart = page => ({
+  type: moviesTypes.FETCH_MOVIES_GENRES_START,
+  payload: page
 });
 
 export const fetchMoviesByGenresSuccess = moviesList => ({
@@ -29,4 +31,14 @@ export const fetchMoviesByGenresSuccess = moviesList => ({
 export const fetchMoviesByGenresFailure = errorMessage => ({
   type: moviesTypes.FETCH_MOVIES_GENRES_FAILURE,
   payload: errorMessage
+});
+
+export const nextPage = page => ({
+  type: moviesTypes.NEXT_PAGE,
+  payload: page + 1
+});
+
+export const prevPage = page => ({
+  type: moviesTypes.PREV_PAGE,
+  payload: page - 1
 });

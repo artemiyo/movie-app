@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+// ========================== STYLES:BEGIN ========================== //
+
 const roller = keyframes`
 	0% {
     transform: rotate(0deg);
@@ -117,6 +119,8 @@ const RollerMain = styled.div`
     }
   }
 `;
+
+// ========================== STYLES:END ========================== //
 
 const Loader = () => (
   <LoaderWrapper>
