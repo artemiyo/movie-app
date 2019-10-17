@@ -33,6 +33,7 @@ export const fetchMoviesByGenresFailure = errorMessage => ({
   payload: errorMessage
 });
 
+// Actions for pagination
 export const nextPage = page => ({
   type: moviesTypes.NEXT_PAGE,
   payload: page + 1
@@ -41,4 +42,25 @@ export const nextPage = page => ({
 export const prevPage = page => ({
   type: moviesTypes.PREV_PAGE,
   payload: page - 1
+});
+
+// Actions for fetching movies by genres
+export const fetchMoviesSearchStart = page => ({
+  type: moviesTypes.FETCH_MOVIES_SEARCH_START,
+  payload: page
+});
+
+export const fetchMoviesSearchSuccess = moviesList => ({
+  type: moviesTypes.FETCH_MOVIES_SEARCH_SUCCESS,
+  payload: moviesList
+});
+
+export const fetchMoviesSearchFailure = errorMessage => ({
+  type: moviesTypes.FETCH_MOVIES_SEARCH_FAILURE,
+  payload: errorMessage
+});
+
+export const getInputValue = value => ({
+  type: moviesTypes.GET_INPUT_VALUE,
+  payload: value
 });

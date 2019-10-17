@@ -5,7 +5,9 @@ import {
   fetchMoviesSuccess,
   fetchMoviesFailure,
   fetchMoviesByGenresSuccess,
-  fetchMoviesByGenresFailure
+  fetchMoviesByGenresFailure,
+  fetchMoviesSearchSuccess,
+  fetchMoviesSearchFailure
 } from './moviesActions';
 import moviesTypes from './moviesTypes';
 
@@ -55,6 +57,27 @@ export function* fetchMoviesByGenresAsync() {
   }
 }
 
+// Fetch movies search
+export function* fetchMoviesSearchAsync() {
+  const getState = yield select();
+  const page = getState.movies.page;
+  const query = getState.movies.inputValue;
+
+  const response = yield tmdb.get(`/search/movie/`, {
+    params: {
+      api_key: process.env.REACT_APP_KEY,
+      page: page,
+      query: query
+    }
+  });
+
+  try {
+    yield put(fetchMoviesSearchSuccess(response.data));
+  } catch (err) {
+    yield put(fetchMoviesSearchFailure(err));
+  }
+}
+
 export function* fetchMoviesStart() {
   yield takeLatest(moviesTypes.FETCH_MOVIES_START, fetchMoviesAsync);
 }
@@ -66,6 +89,17 @@ export function* fetchMoviesByGenresStart() {
   );
 }
 
+export function* fetchMoviesSearchStart() {
+  yield takeLatest(
+    moviesTypes.FETCH_MOVIES_SEARCH_START,
+    fetchMoviesSearchStart
+  );
+}
+
 export function* moviesSaga() {
-  yield all([call(fetchMoviesStart), call(fetchMoviesByGenresStart)]);
+  yield all([
+    call(fetchMoviesStart),
+    call(fetchMoviesByGenresStart),
+    call(fetchMoviesSearchStart)
+  ]);
 }

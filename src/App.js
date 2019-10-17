@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import Sidebar from './containers/Sidebar';
-import Search from './components/Search';
+import SearchBar from './components/SearchBar';
 import Liked from './components/Liked';
 import Loader from './components/Loader';
 
 import Discover from './containers/Discover';
 import Genre from './containers/Genre';
+import Search from './containers/Search';
 
 import { fetchGenresStart } from './redux/navigation/navigationActions';
 
@@ -59,7 +60,7 @@ function App({ isLoading, fetchGenresStart }) {
         <Sidebar />
         <MoviesWrapper>
           <SearchPanel>
-            <Search />
+            <SearchBar />
             <Liked />
           </SearchPanel>
           <MoviesListWrapper>
@@ -81,6 +82,10 @@ function App({ isLoading, fetchGenresStart }) {
               <Route
                 path={`${process.env.PUBLIC_URL}/genres/:name`}
                 component={Genre}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL}/search/:query`}
+                component={Search}
               />
             </Switch>
           </MoviesListWrapper>
