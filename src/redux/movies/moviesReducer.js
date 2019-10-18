@@ -4,8 +4,9 @@ const INITIAL_STATE = {
   isMoviesLoading: true,
   moviesList: [],
   errorMessage: '',
-  inputValue: '',
-  page: 1
+  query: '',
+  page: 1,
+  information: null
 };
 
 const moviesReducer = (state = INITIAL_STATE, action) => {
@@ -34,10 +35,10 @@ const moviesReducer = (state = INITIAL_STATE, action) => {
         isMoviesLoading: false,
         errorMessage: action.payload
       };
-    case moviesTypes.GET_INPUT_VALUE:
+    case moviesTypes.GET_QUERY_VALUE:
       return {
         ...state,
-        inputValue: action.payload
+        query: action.payload
       };
     default:
       return state;

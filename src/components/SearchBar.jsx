@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import { getInputValue } from '../redux/movies/moviesActions';
+import { getQueryValue } from '../redux/movies/moviesActions';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -42,18 +43,18 @@ const SearchIcon = styled(FontAwesomeIcon)`
 
 // ========================== STYLES:END ========================== //
 
-const SearchBar = ({ getInputValue, history }) => {
+const SearchBar = ({ getQueryValue, history }) => {
   const [value, setValue] = useState('');
 
-  const onHandleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    getInputValue(value);
-    history.push(`${process.env.PUBLIC_URL}/search/${value}`);
+    getQueryValue(value);
     setValue('');
+    history.push(`${process.env.PUBLIC_URL}/search/${value}`);
   };
 
   return (
-    <Form onSubmit={onHandleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <SearchIcon icon={faSearch} />
       <FormInput
         type='text'
@@ -65,9 +66,10 @@ const SearchBar = ({ getInputValue, history }) => {
   );
 };
 
-export default withRouter(
+export default compose(
+  withRouter,
   connect(
     null,
-    { getInputValue }
-  )(SearchBar)
-);
+    { getQueryValue }
+  )
+)(SearchBar);

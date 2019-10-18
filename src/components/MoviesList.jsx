@@ -18,7 +18,7 @@ const MovieList = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 6rem;
+  margin-top: 4rem;
 `;
 
 // ========================== STYLES:BEGIN ========================== //

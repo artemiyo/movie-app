@@ -1,5 +1,6 @@
 import { takeLatest, put, call, all, select } from 'redux-saga/effects';
 import tmdb from '../../api/tmdb';
+import moviesTypes from './moviesTypes';
 
 import {
   fetchMoviesSuccess,
@@ -9,7 +10,6 @@ import {
   fetchMoviesSearchSuccess,
   fetchMoviesSearchFailure
 } from './moviesActions';
-import moviesTypes from './moviesTypes';
 
 // Fetch movies by discover category
 export function* fetchMoviesAsync() {
@@ -21,7 +21,7 @@ export function* fetchMoviesAsync() {
   const response = yield tmdb.get(`/movie/${movieCategory}/`, {
     params: {
       api_key: process.env.REACT_APP_KEY,
-      page: page
+      page
     }
   });
   try {
@@ -46,7 +46,7 @@ export function* fetchMoviesByGenresAsync() {
     params: {
       api_key: process.env.REACT_APP_KEY,
       with_genres: genreId,
-      page: page
+      page
     }
   });
 
@@ -61,13 +61,13 @@ export function* fetchMoviesByGenresAsync() {
 export function* fetchMoviesSearchAsync() {
   const getState = yield select();
   const page = getState.movies.page;
-  const query = getState.movies.inputValue;
+  const query = getState.movies.query;
 
   const response = yield tmdb.get(`/search/movie/`, {
     params: {
       api_key: process.env.REACT_APP_KEY,
-      page: page,
-      query: query
+      query,
+      page
     }
   });
 
@@ -92,7 +92,7 @@ export function* fetchMoviesByGenresStart() {
 export function* fetchMoviesSearchStart() {
   yield takeLatest(
     moviesTypes.FETCH_MOVIES_SEARCH_START,
-    fetchMoviesSearchStart
+    fetchMoviesSearchAsync
   );
 }
 

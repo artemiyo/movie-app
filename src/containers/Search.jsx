@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { createStructuredSelector } from 'reselect';
 import queryString from 'query-string';
 import MoviesList from '../components/MoviesList';
 
-import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
-
-import { fetchMoviesSearchStart } from '../redux/movies/moviesActions';
+import {
+  fetchMoviesSearchStart,
+  getQueryValue
+} from '../redux/movies/moviesActions';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -21,27 +22,25 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Search = ({ query, fetchMoviesSearchStart, match, location }) => {
+const Search = ({ fetchMoviesSearchStart, getQueryValue, match, location }) => {
   const params = queryString.parse(location.search);
-  console.log(params);
-  // useEffect(() => {
-  // 	fetchMoviesSearchStart()
-  // }, []);
+
+  useEffect(() => {
+    getQueryValue(match.params.query);
+    fetchMoviesSearchStart(params.page);
+  }, [params.page, match.params.query]);
   return (
     <div>
-      <Title>Result of searching {query}</Title>
+      <Title>Result of searching: {match.params.query}</Title>
       <MoviesList />
     </div>
   );
 };
 
-const mapStateToProps = ({ movies }) => ({
-  query: movies.inputValue
-});
-
-export default withRouter(
+export default compose(
+  withRouter,
   connect(
-    mapStateToProps,
-    { fetchMoviesSearchStart }
-  )(Search)
-);
+    null,
+    { fetchMoviesSearchStart, getQueryValue }
+  )
+)(Search);

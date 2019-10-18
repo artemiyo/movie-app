@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
@@ -47,9 +48,10 @@ const mapStateToProps = createStructuredSelector({
   selectedMenu: selectGetSelectedMenu
 });
 
-export default withRouter(
+export default compose(
+  withRouter,
   connect(
     mapStateToProps,
     { getSelectedMenu, fetchMoviesByGenresStart }
-  )(Genre)
-);
+  )
+)(Genre);

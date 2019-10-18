@@ -158,9 +158,7 @@ const mapStateToProps = createStructuredSelector({
   selectedMenu: selectGetSelectedMenu
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { getMenuId }
-  )(Navigation)
-);
+export default connect(
+  mapStateToProps,
+  { getMenuId }
+)(Navigation);

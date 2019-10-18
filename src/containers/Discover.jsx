@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
@@ -11,7 +12,6 @@ import { getSelectedMenu } from '../redux/navigation/navigationActions';
 import { fetchMoviesStart } from '../redux/movies/moviesActions';
 
 import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
-import Pagination from '../components/Pagination';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -50,9 +50,10 @@ const mapStateToProps = createStructuredSelector({
   selectedMenu: selectGetSelectedMenu
 });
 
-export default withRouter(
+export default compose(
+  withRouter,
   connect(
     mapStateToProps,
     { fetchMoviesStart, getSelectedMenu }
-  )(Discover)
-);
+  )
+)(Discover);

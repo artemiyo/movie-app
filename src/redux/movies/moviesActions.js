@@ -18,6 +18,7 @@ export const fetchMoviesFailure = errorMessage => ({
 });
 
 // Actions for fetching movies by genres
+
 export const fetchMoviesByGenresStart = page => ({
   type: moviesTypes.FETCH_MOVIES_GENRES_START,
   payload: page
@@ -34,6 +35,7 @@ export const fetchMoviesByGenresFailure = errorMessage => ({
 });
 
 // Actions for pagination
+
 export const nextPage = page => ({
   type: moviesTypes.NEXT_PAGE,
   payload: page + 1
@@ -44,7 +46,8 @@ export const prevPage = page => ({
   payload: page - 1
 });
 
-// Actions for fetching movies by genres
+// Actions for fetching movies by searching
+
 export const fetchMoviesSearchStart = page => ({
   type: moviesTypes.FETCH_MOVIES_SEARCH_START,
   payload: page
@@ -60,7 +63,9 @@ export const fetchMoviesSearchFailure = errorMessage => ({
   payload: errorMessage
 });
 
-export const getInputValue = value => ({
-  type: moviesTypes.GET_INPUT_VALUE,
-  payload: value
+// Get the value from the search bar input
+
+export const getQueryValue = query => ({
+  type: moviesTypes.GET_QUERY_VALUE,
+  payload: query
 });
