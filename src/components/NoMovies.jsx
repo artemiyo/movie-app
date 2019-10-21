@@ -7,10 +7,6 @@ import Button from './Button';
 const NoMoviesWrapper = styled.div`
   text-align: center;
   margin-top: 20rem;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
 `;
 
 const NoMoviesText = styled.p`
