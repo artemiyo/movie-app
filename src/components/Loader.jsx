@@ -18,7 +18,7 @@ const LoaderWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: ${props => props.theme.colors.body};
+  background: ${props => props.theme.colors.main};
 `;
 
 const RollerMain = styled.div`

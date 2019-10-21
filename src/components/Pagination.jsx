@@ -24,10 +24,20 @@ const PaginationWrapper = styled.div`
 // ========================== STYLES:END ========================== //
 
 const Pagination = ({ movies }) => {
-  const { page, total_pages } = movies;
+  const { page, total_pages, results } = movies;
 
   if (total_pages === 1) {
     return null;
+  }
+
+  if (total_pages === 0 || !results) {
+    return (
+      <PaginationWrapper>
+        <Link to='/'>
+          <Button>Home</Button>
+        </Link>
+      </PaginationWrapper>
+    );
   }
 
   if (page < total_pages && page === 1) {

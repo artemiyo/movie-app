@@ -10,6 +10,7 @@ import {
   fetchMoviesSearchStart,
   getQueryValue
 } from '../redux/movies/moviesActions';
+import NoMovies from '../components/NoMovies';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -22,13 +23,26 @@ const Title = styled.h1`
 // ========================== STYLES:END ========================== //
 
 // Component
-const Search = ({ fetchMoviesSearchStart, getQueryValue, match, location }) => {
+const Search = ({
+  fetchMoviesSearchStart,
+  getQueryValue,
+  match,
+  location,
+  movies
+}) => {
   const params = queryString.parse(location.search);
+
+  const { results, total_results } = movies;
 
   useEffect(() => {
     getQueryValue(match.params.query);
     fetchMoviesSearchStart(params.page);
   }, [params.page, match.params.query]);
+
+  if (total_results === 0 || !results) {
+    return <NoMovies title={match.params.query} />;
+  }
+
   return (
     <div>
       <Title>Result of searching: {match.params.query}</Title>
@@ -37,10 +51,14 @@ const Search = ({ fetchMoviesSearchStart, getQueryValue, match, location }) => {
   );
 };
 
+const mapStateToProps = ({ movies }) => ({
+  movies: movies.moviesList
+});
+
 export default compose(
   withRouter,
   connect(
-    null,
+    mapStateToProps,
     { fetchMoviesSearchStart, getQueryValue }
   )
 )(Search);
