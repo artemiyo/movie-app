@@ -6,8 +6,7 @@ const theme = {
     hover: '#848EF2',
     selected: '#848EF2',
     gradient: '#848EF2',
-    radial_1: '#000',
-    radial_2: '#141C25'
+    radial: '20, 28, 37'
   },
   size: {
     smallest: '25em', //275px

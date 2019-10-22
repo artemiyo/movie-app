@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import queryString from 'query-string';
+import { animateScroll } from 'react-scroll';
 
 import MoviesList from '../components/MoviesList';
 
@@ -35,6 +36,9 @@ const Discover = ({
   useEffect(() => {
     getSelectedMenu(match.params.name);
     fetchMoviesStart(params.page);
+    animateScroll.scrollToTop({
+      smooth: true
+    });
     return () => getSelectedMenu();
   }, [match.params.name, params.page]);
 

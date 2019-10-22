@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import queryString from 'query-string';
 import MoviesList from '../components/MoviesList';
+import { animateScroll } from 'react-scroll';
 
 import {
   fetchMoviesSearchStart,
@@ -37,6 +38,9 @@ const Search = ({
   useEffect(() => {
     getQueryValue(match.params.query);
     fetchMoviesSearchStart(params.page);
+    animateScroll.scrollToTop({
+      smooth: true
+    });
   }, [params.page, match.params.query]);
 
   if (total_results === 0 || !results) {

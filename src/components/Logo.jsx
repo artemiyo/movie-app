@@ -30,14 +30,14 @@ const LogoLink = styled(Link)`
 // ========================== STYLES:END ========================== //
 
 const Logo = () => {
-  return (
-    <LogoWrapper>
-      <LogoLink to='/'>
-        <LogoIcon icon={faFilm} />
-        Movies
+	return (
+		<LogoWrapper>
+			<LogoLink to='/'>
+				<LogoIcon icon={faFilm} />
+				Movies
       </LogoLink>
-    </LogoWrapper>
-  );
+		</LogoWrapper>
+	);
 };
 
 export default Logo;

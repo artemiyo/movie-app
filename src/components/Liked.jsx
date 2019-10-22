@@ -20,7 +20,7 @@ const HeartIcon = styled(FontAwesomeIcon)`
 // ========================== STYLES:END ========================== //
 
 const Liked = () => {
-  return <HeartIcon icon={faHeart} />;
+	return <HeartIcon icon={faHeart} />;
 };
 
 export default Liked;
