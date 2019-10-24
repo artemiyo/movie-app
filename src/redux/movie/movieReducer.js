@@ -1,5 +1,4 @@
 import movieTypes from './movieTypes';
-import moviesTypes from '../movies/moviesTypes';
 
 const INITIAL_STATE = {
   isMovieLoading: true,
@@ -32,14 +31,6 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         ...state,
         selectedMovieID: action.payload
       };
-    case moviesTypes.FETCH_MOVIES_START:
-    case moviesTypes.FETCH_MOVIES_GENRES_START:
-    case moviesTypes.FETCH_MOVIES_SEARCH_START: {
-      return {
-        ...state,
-        movieItem: {}
-      };
-    }
     default:
       return state;
   }

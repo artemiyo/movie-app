@@ -18,7 +18,6 @@ import { fetchGenresStart } from './redux/navigation/navigationActions';
 
 import { selectIsNavigationLoading } from './redux/navigation/navigationSelectors';
 import { selectMovieItem } from './redux/movie/movieSelectors';
-import MoviesItem from './components/MovieItem';
 
 // ========================== STYLES:BEGIN ========================== //
 const MainWrapper = styled.div`
@@ -32,15 +31,15 @@ const MainWrapper = styled.div`
 const MoviesWrapper = styled.div`
   width: 80%;
   padding: 5rem;
-  /* background: ${props => props.theme.colors.body}; */
-	background: ${props => {
+  background: ${props => {
     if (props.movieItem) {
       return `radial-gradient(
 			circle, 
 			rgba(${props.theme.colors.radial}, 0.9) 0%, 
 			rgba(${props.theme.colors.radial}, 0.9) 100%), 
-			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path}) ;
-			background-size: cover
+			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path});
+			background-size: cover;
+			background-position: center top;
 			background-repeat: no-repeat`;
     } else {
       return `${props.theme.colors.body}`;
@@ -60,11 +59,11 @@ const SearchPanel = styled.div`
 `;
 // ========================== STYLES:END ========================== //
 
-function App({ isLoading, fetchGenresStart, movieItem }) {
+function App({ isNavigationLoading, fetchGenresStart, movieItem }) {
   useEffect(() => {
     fetchGenresStart();
   }, []);
-  return isLoading ? (
+  return isNavigationLoading ? (
     <MainWrapper>
       <Loader />
     </MainWrapper>
@@ -114,7 +113,7 @@ function App({ isLoading, fetchGenresStart, movieItem }) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: selectIsNavigationLoading,
+  isNavigationLoading: selectIsNavigationLoading,
   movieItem: selectMovieItem
 });
 

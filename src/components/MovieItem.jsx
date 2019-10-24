@@ -13,18 +13,18 @@ const MovieLink = styled(Link)`
   &:link,
   &:visited {
     display: inline-block;
-    max-width: 25rem;
+    width: 25rem;
     color: ${props => props.theme.colors.main};
     text-decoration: none;
     margin-bottom: 4rem;
     transition: all 0.3s ease;
     border: ${props => {
-		if (props.poster) {
-			return `2px solid transparent`;
-		} else {
-			return `2px solid ${props.theme.colors.sidebar}`;
-		}
-	}};
+      if (props.poster) {
+        return `2px solid transparent`;
+      } else {
+        return `2px solid ${props.theme.colors.sidebar}`;
+      }
+    }};
   }
 
   &:hover {
@@ -75,39 +75,39 @@ const Rating = styled.span`
 // ========================== STYLES:END ========================== //
 
 const MoviesItem = ({ movie }) => {
-	const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-	useEffect(() => {
-		return () => setIsImageLoaded(false);
-	}, []);
+  useEffect(() => {
+    return () => setIsImageLoaded(false);
+  }, []);
 
-	const { title, vote_average, poster_path } = movie;
-	return (
-		<MovieLink
-			poster={poster_path}
-			to={`${process.env.PUBLIC_URL}/movie/${movie.id}`}>
-			<MovieImageWrapper>
-				{!isImageLoaded ? (
-					<ImageLoading>
-						<Loader />
-					</ImageLoading>
-				) : null}
-				<MoviesImage
-					setIsImageLoaded={() => setIsImageLoaded(true)}
-					poster={poster_path}
-					title={title}
-				/>
-			</MovieImageWrapper>
+  const { title, vote_average, poster_path } = movie;
+  return (
+    <MovieLink
+      poster={poster_path}
+      to={`${process.env.PUBLIC_URL}/movie/${movie.id}`}>
+      <MovieImageWrapper>
+        {!isImageLoaded ? (
+          <ImageLoading>
+            <Loader />
+          </ImageLoading>
+        ) : null}
+        <MoviesImage
+          setIsImageLoaded={() => setIsImageLoaded(true)}
+          poster={poster_path}
+          title={title}
+        />
+      </MovieImageWrapper>
 
-			<MovieDetails>
-				<MovieTitle>{title}</MovieTitle>
-				<Rating>
-					<Icon icon={faStar} />
-					{vote_average}
-				</Rating>
-			</MovieDetails>
-		</MovieLink>
-	);
+      <MovieDetails>
+        <MovieTitle>{title}</MovieTitle>
+        <Rating>
+          <Icon icon={faStar} />
+          {vote_average}
+        </Rating>
+      </MovieDetails>
+    </MovieLink>
+  );
 };
 
 export default MoviesItem;
