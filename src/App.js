@@ -39,7 +39,7 @@ const MoviesWrapper = styled.div`
 			rgba(${props.theme.colors.radial}, 0.9) 100%), 
 			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path});
 			background-size: cover;
-			background-position: center top;
+			background-position: center center;
 			background-repeat: no-repeat`;
     } else {
       return `${props.theme.colors.body}`;

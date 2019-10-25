@@ -16,24 +16,31 @@ import {
 } from '../redux/movie/movieSelectors';
 
 const MovieWrapper = styled.div`
-  height: 80vh;
+  height: 100vh;
+`;
+
+const MovieMain = styled.div`
+  width: 80%;
 `;
 
 const MovieMainInformation = styled.div`
-  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const MovieTitle = styled.h1`
-  font-size: 7rem;
+  font-size: 4rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-transform: uppercase;
 `;
 
 const MovieTagline = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 400;
-  width: 50%;
+  width: 90%;
   margin-bottom: 1rem;
+  text-transform: uppercase;
 `;
 
 const MovieDetails = styled.p`
@@ -46,7 +53,7 @@ const MovieOverviewWrapper = styled.div`
 `;
 
 const MovieSubTitle = styled.h3`
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 2rem;
@@ -55,12 +62,13 @@ const MovieSubTitle = styled.h3`
 const MovieOverview = styled.p`
   font-size: 1.6rem;
   font-weight: 100;
-  width: 40%;
+  width: 70%;
   line-height: 1.8em;
 `;
 
 const GenresList = styled.ul`
   display: flex;
+  margin-bottom: 4rem;
 `;
 
 const GenreLink = styled(Link)`
@@ -94,6 +102,22 @@ const MovieGenres = styled.div`
   margin-bottom: 4rem;
 `;
 
+const MovieProduction = styled.div`
+  margin-bottom: 4rem;
+`;
+
+const MovieProductionCompany = styled.ul``;
+
+const MovieItemProduction = styled.li`
+  font-size: 1.6rem;
+  font-weight: 100;
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+`;
+
 const Movie = ({
   fetchMovieStart,
   getMovieID,
@@ -107,7 +131,8 @@ const Movie = ({
     tagline,
     release_date,
     overview,
-    genres
+    genres,
+    production_companies
   } = movieItem;
 
   useEffect(() => {
@@ -121,28 +146,40 @@ const Movie = ({
   return (
     <MovieWrapper imageUrl={backdrop_path}>
       <MovieMainInformation>
-        <MovieTitle>{title}</MovieTitle>
-        <MovieTagline>{tagline}</MovieTagline>
-        <MovieDetails>
-          {release_date ? release_date.slice(0, 4) : ''}
-        </MovieDetails>
+        <MovieMain>
+          <MovieTitle>{title}</MovieTitle>
+          <MovieTagline>{tagline}</MovieTagline>
+          <MovieDetails>
+            {release_date ? release_date.slice(0, 4) : ''}
+          </MovieDetails>
+          <MovieOverviewWrapper>
+            <MovieSubTitle>Overview</MovieSubTitle>
+            <MovieOverview>{overview}</MovieOverview>
+          </MovieOverviewWrapper>
+          <MovieProduction>
+            <MovieSubTitle>Production Companies</MovieSubTitle>
+            <MovieProductionCompany>
+              {production_companies.map(({ name, id }) => (
+                <MovieItemProduction key={id}>{name}</MovieItemProduction>
+              ))}
+            </MovieProductionCompany>
+          </MovieProduction>
+          <MovieGenres>
+            <MovieSubTitle>Genres</MovieSubTitle>
+            <GenresList>
+              {genres.map(({ name, id }) => (
+                <GenreLink
+                  key={id}
+                  to={`${process.env.PUBLIC_URL}/genres/${name.toLowerCase()}`}>
+                  <GenreItem>{name}</GenreItem>
+                </GenreLink>
+              ))}
+            </GenresList>
+          </MovieGenres>
+        </MovieMain>
+        <div></div>
       </MovieMainInformation>
-      <MovieOverviewWrapper>
-        <MovieSubTitle>Overview</MovieSubTitle>
-        <MovieOverview>{overview}</MovieOverview>
-      </MovieOverviewWrapper>
-      <MovieGenres>
-        <MovieSubTitle>Genres</MovieSubTitle>
-        <GenresList>
-          {genres.map(({ name, id }) => (
-            <GenreLink
-              key={id}
-              to={`${process.env.PUBLIC_URL}/genres/${name.toLowerCase()}`}>
-              <GenreItem>{name}</GenreItem>
-            </GenreLink>
-          ))}
-        </GenresList>
-      </MovieGenres>
+
       <LinkToHome to={`${process.env.PUBLIC_URL}/`}>
         <Button>Home</Button>
       </LinkToHome>

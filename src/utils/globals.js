@@ -19,5 +19,6 @@ export default createGlobalStyle`
 		font-weight: 400;
 		letter-spacing: 0.2em;
 		color: ${props => props.theme.colors.main};
+		background-color: ${props => props.theme.colors.body}
 	}
 `;
