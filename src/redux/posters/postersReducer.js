@@ -17,7 +17,7 @@ const postersReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isPostersLoading: false,
-        postersList: action.payload
+        postersList: action.payload.slice(0, 3)
       };
     case postersTypes.FETCH_POSTERS_FAILURE:
       return {

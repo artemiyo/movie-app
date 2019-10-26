@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import Button from './Button';
 
+// ========================== STYLES:BEGIN ========================== //
+
 const NoMoviesWrapper = styled.div`
   text-align: center;
   margin-top: 20rem;
@@ -18,6 +20,8 @@ const NoMoviesTitle = styled.span`
   color: ${props => props.theme.colors.selected};
   text-decoration: underline;
 `;
+
+// ========================== STYLES:END ========================== //
 
 const NoMovies = ({ title }) => {
   return (

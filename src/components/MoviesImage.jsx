@@ -3,10 +3,14 @@ import styled from 'styled-components';
 
 import NoPoster from './NoPoster';
 
+// ========================== STYLES:BEGIN ========================== //
+
 const MovieImage = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+// ========================== STYLES:END ========================== //
 
 const MoviesImage = ({ poster, title, setIsImageLoaded }) => {
   return poster ? (
