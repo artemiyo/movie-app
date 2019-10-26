@@ -7,8 +7,7 @@ const ButtonContainer = styled.button`
   font-family: 'Roboto', sans-serif;
   width: 11rem;
   height: 4rem;
-  color: ${props => props.theme.colors.main};
-  background-color: ${props => props.theme.colors.sidebar};
+  background-color: ${props => props.theme.colors.main};
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;

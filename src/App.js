@@ -6,7 +6,6 @@ import { createStructuredSelector } from 'reselect';
 
 import Sidebar from './containers/Sidebar';
 import SearchBar from './components/SearchBar';
-import Liked from './components/Liked';
 import Loader from './components/Loader';
 
 import Discover from './containers/Discover';
@@ -15,9 +14,13 @@ import Search from './containers/Search';
 import Movie from './containers/Movie';
 
 import { fetchGenresStart } from './redux/navigation/navigationActions';
+import { setBackground } from './redux/movie/movieActions';
 
 import { selectIsNavigationLoading } from './redux/navigation/navigationSelectors';
-import { selectMovieItem } from './redux/movie/movieSelectors';
+import {
+  selectMovieItem,
+  selectSetImageBackground
+} from './redux/movie/movieSelectors';
 
 // ========================== STYLES:BEGIN ========================== //
 const MainWrapper = styled.div`
@@ -35,11 +38,10 @@ const MoviesWrapper = styled.div`
     if (props.movieItem) {
       return `radial-gradient(
 			circle, 
-			rgba(${props.theme.colors.radial}, 0.9) 0%, 
-			rgba(${props.theme.colors.radial}, 0.9) 100%), 
+			rgba(${props.theme.colors.radial}, 0.95) 0%, 
+			rgba(${props.theme.colors.radial}, 0.95) 100%), 
 			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path});
 			background-size: cover;
-			background-position: center center;
 			background-repeat: no-repeat`;
     } else {
       return `${props.theme.colors.body}`;
@@ -74,7 +76,6 @@ function App({ isNavigationLoading, fetchGenresStart, movieItem }) {
         <MoviesWrapper movieItem={movieItem}>
           <SearchPanel>
             <SearchBar />
-            <Liked />
           </SearchPanel>{' '}
           <MoviesListWrapper>
             <Switch>
@@ -120,6 +121,7 @@ const mapStateToProps = createStructuredSelector({
 export default connect(
   mapStateToProps,
   {
-    fetchGenresStart
+    fetchGenresStart,
+    setBackground
   }
 )(App);

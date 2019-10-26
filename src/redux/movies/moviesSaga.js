@@ -34,7 +34,7 @@ export function* fetchMoviesAsync() {
 // Fetch movies by genre
 export function* fetchMoviesByGenresAsync() {
   const getState = yield select();
-  const genresList = getState.navigation.genresList.genres;
+  const genresList = getState.navigation.genresList;
   const selectedMenu = getState.navigation.selectedMenu;
   const page = getState.movies.page;
   const genreId = genresList

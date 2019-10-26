@@ -13,7 +13,7 @@ export function* fetchGenresAsync() {
     }
   });
   try {
-    yield put(fetchGenresSuccess(response.data));
+    yield put(fetchGenresSuccess(response.data.genres));
   } catch (err) {
     yield put(fetchGenressFailure(err));
   }

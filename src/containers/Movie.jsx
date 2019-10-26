@@ -10,10 +10,15 @@ import Loader from '../components/Loader';
 import Button from '../components/Button';
 
 import { fetchMovieStart, getMovieID } from '../redux/movie/movieActions';
+import { fetchPostersStart } from '../redux/posters/postersActions';
 import {
   selectIsMovieLoading,
   selectMovieItem
 } from '../redux/movie/movieSelectors';
+import {
+  selectPostersList,
+  sellectIsPostersLoading
+} from '../redux/posters/postersSelectors';
 
 const MovieWrapper = styled.div`
   height: 100vh;
@@ -118,16 +123,35 @@ const MovieItemProduction = styled.li`
   }
 `;
 
+const PostersList = styled.ul``;
+
+const PosterItem = styled.li`
+  display: block;
+  width: 45rem;
+  height: 30rem;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+`;
+
+const PosterImage = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
 const Movie = ({
   fetchMovieStart,
+  fetchPostersStart,
   getMovieID,
   match,
   movieItem,
+  postersList,
+  isPostersLoading,
   isMovieLoading
 }) => {
   const {
     title,
-    backdrop_path,
     tagline,
     release_date,
     overview,
@@ -138,13 +162,14 @@ const Movie = ({
   useEffect(() => {
     getMovieID(match.params.id);
     fetchMovieStart();
+    fetchPostersStart();
     return () => getMovieID();
   }, [match.params.id]);
 
-  if (isMovieLoading) return <Loader />;
+  if (isMovieLoading || isPostersLoading) return <Loader />;
 
   return (
-    <MovieWrapper imageUrl={backdrop_path}>
+    <MovieWrapper>
       <MovieMainInformation>
         <MovieMain>
           <MovieTitle>{title}</MovieTitle>
@@ -177,7 +202,19 @@ const Movie = ({
             </GenresList>
           </MovieGenres>
         </MovieMain>
-        <div></div>
+        <div>
+          <MovieSubTitle>Photos</MovieSubTitle>
+          <PostersList>
+            {postersList.map(({ file_path }, idx) => (
+              <PosterItem key={idx}>
+                <PosterImage
+                  src={`https://image.tmdb.org/t/p/original${file_path}`}
+                  alt={`Frame${idx + 1}`}
+                />
+              </PosterItem>
+            ))}
+          </PostersList>
+        </div>
       </MovieMainInformation>
 
       <LinkToHome to={`${process.env.PUBLIC_URL}/`}>
@@ -189,13 +226,15 @@ const Movie = ({
 
 const mapStateToProps = createStructuredSelector({
   movieItem: selectMovieItem,
-  isMovieLoading: selectIsMovieLoading
+  isMovieLoading: selectIsMovieLoading,
+  postersList: selectPostersList,
+  isPostersLoading: sellectIsPostersLoading
 });
 
 export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { fetchMovieStart, getMovieID }
+    { fetchMovieStart, getMovieID, fetchPostersStart }
   )
 )(Movie);

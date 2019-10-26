@@ -123,18 +123,18 @@ const RollerMain = styled.div`
 // ========================== STYLES:END ========================== //
 
 const Loader = () => (
-	<LoaderWrapper>
-		<RollerMain>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</RollerMain>
-	</LoaderWrapper>
+  <LoaderWrapper>
+    <RollerMain>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </RollerMain>
+  </LoaderWrapper>
 );
 
 export default Loader;

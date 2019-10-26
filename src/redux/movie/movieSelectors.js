@@ -11,3 +11,8 @@ export const selectIsMovieLoading = createSelector(
   [selectMovie],
   movie => movie.isMovieLoading
 );
+
+export const selectSetImageBackground = createSelector(
+  [selectMovie],
+  movie => movie.setImageBackground
+);
