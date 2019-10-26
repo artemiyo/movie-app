@@ -18,7 +18,3 @@ export const getMovieID = id => ({
   type: movieTypes.GET_MOVIE_ID,
   payload: id
 });
-
-export const setBackground = () => ({
-  type: movieTypes.SET_IMAGE_BACKGROUND
-});
