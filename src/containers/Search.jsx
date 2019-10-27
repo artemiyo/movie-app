@@ -11,6 +11,8 @@ import {
   fetchMoviesSearchStart,
   getQueryValue
 } from '../redux/movies/moviesActions';
+import { deleteMovieBackground } from '../redux/movie/movieActions';
+
 import NoMovies from '../components/NoMovies';
 
 // ========================== STYLES:BEGIN ========================== //
@@ -29,7 +31,8 @@ const Search = ({
   getQueryValue,
   match,
   location,
-  movies
+  movies,
+  deleteMovieBackground
 }) => {
   const params = queryString.parse(location.search);
 
@@ -37,6 +40,7 @@ const Search = ({
 
   useEffect(() => {
     getQueryValue(match.params.query);
+    deleteMovieBackground();
     fetchMoviesSearchStart(params.page);
     animateScroll.scrollToTop({
       smooth: true
@@ -63,6 +67,6 @@ export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { fetchMoviesSearchStart, getQueryValue }
+    { fetchMoviesSearchStart, getQueryValue, deleteMovieBackground }
   )
 )(Search);

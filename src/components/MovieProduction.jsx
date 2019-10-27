@@ -28,15 +28,19 @@ const MovieItemProduction = styled.li`
 
 // ========================== STYLES:END ========================== //
 
-const MovieProduction = ({ companies }) => (
-  <MovieProductionWrapper>
-    <MovieSubTitle>Production Companies</MovieSubTitle>
-    <MovieProductionCompany>
-      {companies.map(({ name, id }) => (
-        <MovieItemProduction key={id}>{name}</MovieItemProduction>
-      ))}
-    </MovieProductionCompany>
-  </MovieProductionWrapper>
-);
+const MovieProduction = ({ companies }) => {
+  if (companies.length === 0) return null;
+
+  return (
+    <MovieProductionWrapper>
+      <MovieSubTitle>Production Companies</MovieSubTitle>
+      <MovieProductionCompany>
+        {companies.map(({ name, id }) => (
+          <MovieItemProduction key={id}>{name}</MovieItemProduction>
+        ))}
+      </MovieProductionCompany>
+    </MovieProductionWrapper>
+  );
+};
 
 export default MovieProduction;

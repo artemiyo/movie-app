@@ -13,7 +13,11 @@ import MovieProduction from '../components/MovieProduction';
 import MovieGenres from '../components/MovieGenres';
 import MoviePosters from '../components/MoviePosters';
 
-import { fetchMovieStart, getMovieID } from '../redux/movie/movieActions';
+import {
+  fetchMovieStart,
+  getMovieID,
+  setMovieBackground
+} from '../redux/movie/movieActions';
 import { fetchPostersStart } from '../redux/posters/postersActions';
 import {
   selectIsMovieLoading,
@@ -69,7 +73,8 @@ const Movie = ({
   movieItem,
   postersList,
   isPostersLoading,
-  isMovieLoading
+  isMovieLoading,
+  setMovieBackground
 }) => {
   const {
     title,
@@ -83,6 +88,7 @@ const Movie = ({
   useEffect(() => {
     getMovieID(match.params.id);
     fetchMovieStart();
+    setMovieBackground();
     fetchPostersStart();
     return () => getMovieID();
   }, [match.params.id]);
@@ -123,6 +129,6 @@ export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { fetchMovieStart, getMovieID, fetchPostersStart }
+    { fetchMovieStart, getMovieID, fetchPostersStart, setMovieBackground }
   )
 )(Movie);

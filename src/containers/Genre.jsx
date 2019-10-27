@@ -13,6 +13,7 @@ import { fetchMoviesByGenresStart } from '../redux/movies/moviesActions';
 
 import { getSelectedMenu } from '../redux/navigation/navigationActions';
 import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
+import { deleteMovieBackground } from '../redux/movie/movieActions';
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -30,12 +31,15 @@ const Genre = ({
   getSelectedMenu,
   fetchMoviesByGenresStart,
   match,
-  location
+  location,
+  deleteMovieBackground
 }) => {
   const params = queryString.parse(location.search);
   useEffect(() => {
     getSelectedMenu(match.params.name);
+    deleteMovieBackground();
     fetchMoviesByGenresStart(params.page);
+
     animateScroll.scrollToTop({
       smooth: true
     });
@@ -57,6 +61,6 @@ export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { getSelectedMenu, fetchMoviesByGenresStart }
+    { getSelectedMenu, fetchMoviesByGenresStart, deleteMovieBackground }
   )
 )(Genre);

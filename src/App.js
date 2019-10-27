@@ -14,12 +14,12 @@ import Search from './containers/Search';
 import Movie from './containers/Movie';
 
 import { fetchGenresStart } from './redux/navigation/navigationActions';
-import { setBackground } from './redux/movie/movieActions';
+import { deleteMovieBackground } from './redux/movie/movieActions';
 
 import { selectIsNavigationLoading } from './redux/navigation/navigationSelectors';
 import {
   selectMovieItem,
-  selectSetImageBackground
+  selectMovieBackground
 } from './redux/movie/movieSelectors';
 
 // ========================== STYLES:BEGIN ========================== //
@@ -35,11 +35,11 @@ const MoviesWrapper = styled.div`
   width: 80%;
   padding: 5rem;
   background: ${props => {
-    if (props.movieItem) {
+    if (props.movieBackground) {
       return `radial-gradient(
 			circle, 
-			rgba(${props.theme.colors.radial}, 0.95) 0%, 
-			rgba(${props.theme.colors.radial}, 0.95) 100%), 
+			rgba(${props.theme.colors.radial}, 0.9) 0%, 
+			rgba(${props.theme.colors.radial}, 0.9) 100%), 
 			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path});
 			background-size: cover;
 			background-repeat: no-repeat`;
@@ -61,9 +61,16 @@ const SearchPanel = styled.div`
 `;
 // ========================== STYLES:END ========================== //
 
-function App({ isNavigationLoading, fetchGenresStart, movieItem }) {
+function App({
+  isNavigationLoading,
+  fetchGenresStart,
+  movieItem,
+  deleteMovieBackground,
+  movieBackground
+}) {
   useEffect(() => {
     fetchGenresStart();
+    deleteMovieBackground();
   }, []);
   return isNavigationLoading ? (
     <MainWrapper>
@@ -73,7 +80,7 @@ function App({ isNavigationLoading, fetchGenresStart, movieItem }) {
     <div className='App'>
       <MainWrapper>
         <Sidebar />
-        <MoviesWrapper movieItem={movieItem}>
+        <MoviesWrapper movieBackground={movieBackground} movieItem={movieItem}>
           <SearchPanel>
             <SearchBar />
           </SearchPanel>{' '}
@@ -115,13 +122,14 @@ function App({ isNavigationLoading, fetchGenresStart, movieItem }) {
 
 const mapStateToProps = createStructuredSelector({
   isNavigationLoading: selectIsNavigationLoading,
-  movieItem: selectMovieItem
+  movieItem: selectMovieItem,
+  movieBackground: selectMovieBackground
 });
 
 export default connect(
   mapStateToProps,
   {
     fetchGenresStart,
-    setBackground
+    deleteMovieBackground
   }
 )(App);

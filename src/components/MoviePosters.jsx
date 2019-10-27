@@ -29,20 +29,24 @@ const PosterImage = styled.img`
 
 // ========================== STYLES:END ========================== //
 
-const MoviePosters = ({ posters }) => (
-  <div>
-    <MovieSubTitle>Photos</MovieSubTitle>
-    <PostersList>
-      {posters.map(({ file_path }, idx) => (
-        <PosterItem key={idx}>
-          <PosterImage
-            src={`https://image.tmdb.org/t/p/original${file_path}`}
-            alt={`Frame${idx + 1}`}
-          />
-        </PosterItem>
-      ))}
-    </PostersList>
-  </div>
-);
+const MoviePosters = ({ posters }) => {
+  if (posters.length === 0) return null;
+
+  return (
+    <div>
+      <MovieSubTitle>Photos</MovieSubTitle>
+      <PostersList>
+        {posters.map(({ file_path }, idx) => (
+          <PosterItem key={idx}>
+            <PosterImage
+              src={`https://image.tmdb.org/t/p/original${file_path}`}
+              alt={`Frame${idx + 1}`}
+            />
+          </PosterItem>
+        ))}
+      </PostersList>
+    </div>
+  );
+};
 
 export default MoviePosters;

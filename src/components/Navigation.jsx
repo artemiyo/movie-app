@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
-
 import {
   selectGenresList,
   selectDiscoverList,
@@ -32,6 +31,7 @@ const Links = styled(Link)`
 
 const NavigationWrapper = styled.div`
   position: relative;
+  opacity: 1;
 `;
 
 const Discover = styled.div`

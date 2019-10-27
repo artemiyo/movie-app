@@ -45,19 +45,23 @@ const GenreItem = styled.li`
 
 // ========================== STYLES:END ========================== //
 
-const MovieGenres = ({ genres }) => (
-  <MovieGenresWrapper>
-    <MovieSubTitle>Genres</MovieSubTitle>
-    <GenresList>
-      {genres.map(({ name, id }) => (
-        <GenreLink
-          key={id}
-          to={`${process.env.PUBLIC_URL}/genres/${name.toLowerCase()}`}>
-          <GenreItem>{name}</GenreItem>
-        </GenreLink>
-      ))}
-    </GenresList>
-  </MovieGenresWrapper>
-);
+const MovieGenres = ({ genres }) => {
+  if (genres.length === 0) return null;
+
+  return (
+    <MovieGenresWrapper>
+      <MovieSubTitle>Genres</MovieSubTitle>
+      <GenresList>
+        {genres.map(({ name, id }) => (
+          <GenreLink
+            key={id}
+            to={`${process.env.PUBLIC_URL}/genres/${name.toLowerCase()}`}>
+            <GenreItem>{name}</GenreItem>
+          </GenreLink>
+        ))}
+      </GenresList>
+    </MovieGenresWrapper>
+  );
+};
 
 export default MovieGenres;

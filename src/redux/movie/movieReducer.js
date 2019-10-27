@@ -4,7 +4,8 @@ const INITIAL_STATE = {
   isMovieLoading: true,
   movieItem: {},
   selectedMovieID: null,
-  errorMessage: ''
+  errorMessage: '',
+  movieBackground: false
 };
 
 const movieReducer = (state = INITIAL_STATE, action) => {
@@ -30,6 +31,16 @@ const movieReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedMovieID: action.payload
+      };
+    case movieTypes.SET_MOVIE_BACKGROUND:
+      return {
+        ...state,
+        movieBackground: true
+      };
+    case movieTypes.DELETE_MOVIE_BACKGROUND:
+      return {
+        ...state,
+        movieBackground: false
       };
     default:
       return state;

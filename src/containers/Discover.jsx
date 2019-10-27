@@ -11,6 +11,7 @@ import MoviesList from '../components/MoviesList';
 
 import { getSelectedMenu } from '../redux/navigation/navigationActions';
 import { fetchMoviesStart } from '../redux/movies/moviesActions';
+import { deleteMovieBackground } from '../redux/movie/movieActions';
 
 import { selectGetSelectedMenu } from '../redux/navigation/navigationSelectors';
 
@@ -30,12 +31,15 @@ const Discover = ({
   fetchMoviesStart,
   match,
   location,
-  getSelectedMenu
+  getSelectedMenu,
+  deleteMovieBackground
 }) => {
   const params = queryString.parse(location.search);
   useEffect(() => {
     getSelectedMenu(match.params.name);
+    deleteMovieBackground();
     fetchMoviesStart(params.page);
+
     animateScroll.scrollToTop({
       smooth: true
     });
@@ -58,6 +62,6 @@ export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { fetchMoviesStart, getSelectedMenu }
+    { fetchMoviesStart, getSelectedMenu, deleteMovieBackground }
   )
 )(Discover);

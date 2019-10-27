@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const MovieOverviewWrapper = styled.div`
   margin: 4rem 0;
+  opacity: 1;
 `;
 
 const MovieSubTitle = styled.h3`
@@ -27,7 +28,11 @@ const MovieOverview = ({ overview }) => {
   return (
     <MovieOverviewWrapper>
       <MovieSubTitle>Overview</MovieSubTitle>
-      <MovieOverviewText>{overview}</MovieOverviewText>
+      {overview ? (
+        <MovieOverviewText>{overview}</MovieOverviewText>
+      ) : (
+        <MovieOverviewText>There's no overview</MovieOverviewText>
+      )}
     </MovieOverviewWrapper>
   );
 };
