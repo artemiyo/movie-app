@@ -52,6 +52,7 @@ const MoviesWrapper = styled.div`
 
 const MoviesListWrapper = styled.div`
   position: relative;
+  min-height: 100vh;
 `;
 
 const SearchPanel = styled.div`

@@ -24,7 +24,6 @@ const Links = styled(Link)`
   &:link,
   &:visited {
     display: block;
-    color: ${props => props.theme.colors.main};
     text-decoration: none;
   }
 `;
@@ -43,39 +42,18 @@ const NavListItem = styled.li`
   position: relative;
   cursor: pointer;
 
-  &:hover:after {
-    width: 80%;
-  }
-
-  &::after {
-    position: absolute;
-    content: '';
-    bottom: -40%;
-    left: -25%;
-    width: ${props => {
+  & a {
+    color: ${props => {
       if (props.selected === props.name.toLowerCase()) {
-        return '80%';
+        return props.theme.colors.selected;
       } else {
-        return 0;
+        return props.theme.colors.main;
       }
     }};
-    height: 175%;
-    z-index: -1;
-    background: linear-gradient(
-      to right,
-      rgba(132, 142, 242, 1),
-      rgba(132, 142, 242, 0.9),
-      rgba(132, 142, 242, 0.8),
-      rgba(132, 142, 242, 0.7),
-      rgba(132, 142, 242, 0.6),
-      rgba(132, 142, 242, 0.5),
-      rgba(132, 142, 242, 0.4),
-      rgba(132, 142, 242, 0.3),
-      rgba(132, 142, 242, 0.2),
-      rgba(132, 142, 242, 0.1),
-      rgba(132, 142, 242, 0)
-    );
-    transition: width 0.3s ease;
+  }
+
+  &:hover a {
+    color: ${props => props.theme.colors.hover};
   }
 
   &:not(:last-child) {

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import queryString from 'query-string';
 import MoviesList from '../components/MoviesList';
@@ -12,6 +13,7 @@ import {
   getQueryValue
 } from '../redux/movies/moviesActions';
 import { deleteMovieBackground } from '../redux/movie/movieActions';
+import { selectMoviesList } from '../redux/movies/moviesSelectors';
 
 import NoMovies from '../components/NoMovies';
 
@@ -59,8 +61,8 @@ const Search = ({
   );
 };
 
-const mapStateToProps = ({ movies }) => ({
-  movies: movies.moviesList
+const mapStateToProps = createStructuredSelector({
+  movies: selectMoviesList
 });
 
 export default compose(
