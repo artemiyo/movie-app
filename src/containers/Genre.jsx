@@ -43,7 +43,7 @@ const Genre = ({
     animateScroll.scrollToTop({
       smooth: true
     });
-    return () => getSelectedMenu();
+    return () => fetchMoviesByGenresStart();
   }, [match.params.name, params.page]);
   return (
     <div>

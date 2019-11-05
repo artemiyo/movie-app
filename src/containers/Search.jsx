@@ -47,6 +47,7 @@ const Search = ({
     animateScroll.scrollToTop({
       smooth: true
     });
+    return () => fetchMoviesSearchStart();
   }, [params.page, match.params.query]);
 
   if (total_results === 0 || !results) {

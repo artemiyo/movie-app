@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,6 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import Sidebar from './containers/Sidebar';
 import SearchBar from './components/SearchBar';
 import Loader from './components/Loader';
+import MobileMenu from './components/MobileMenu';
 
 import Discover from './containers/Discover';
 import Genre from './containers/Genre';
@@ -41,13 +42,23 @@ const MoviesWrapper = styled.div`
 			rgba(${props.theme.colors.radial}, 0.9) 0%, 
 			rgba(${props.theme.colors.radial}, 0.9) 100%), 
 			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path});
-			background-size: cover;
+			// background-size: 100%;
 			background-repeat: no-repeat`;
     } else {
       return `${props.theme.colors.body}`;
     }
   }};
   margin-left: 20%;
+
+  @media ${props => props.theme.mediaQueries.larger} {
+    width: 77%;
+    margin-left: 23%;
+  }
+
+  @media ${props => props.theme.mediaQueries.large} {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 
 const MoviesListWrapper = styled.div`
@@ -59,6 +70,10 @@ const SearchPanel = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 5rem;
+
+  @media ${props => props.theme.mediaQueries.large} {
+    align-items: center;
+  }
 `;
 // ========================== STYLES:END ========================== //
 
@@ -73,6 +88,20 @@ function App({
     fetchGenresStart();
     deleteMovieBackground();
   }, []);
+  const [isMobile, setisMobile] = useState(null);
+  // set mobile menu when media query is <= 68.75em(1100px)
+  const changeMobile = () => {
+    window.matchMedia('(max-width: 68.75em)').matches
+      ? setisMobile(true)
+      : setisMobile(false);
+  };
+
+  useEffect(() => {
+    changeMobile();
+    window.addEventListener('resize', changeMobile);
+    return () => window.removeEventListener('resize', changeMobile);
+  });
+
   return isNavigationLoading ? (
     <MainWrapper>
       <Loader />
@@ -83,6 +112,7 @@ function App({
         <Sidebar />
         <MoviesWrapper movieBackground={movieBackground} movieItem={movieItem}>
           <SearchPanel>
+            {isMobile ? <MobileMenu /> : null}
             <SearchBar />
           </SearchPanel>{' '}
           <MoviesListWrapper>

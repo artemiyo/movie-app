@@ -17,6 +17,10 @@ const Form = styled.form`
   border: 1px solid ${props => props.theme.colors.main};
   opacity: 0.8;
   padding-left: 2rem;
+
+  @media ${props => props.theme.mediaQueries.large} {
+    margin-left: auto;
+  }
 `;
 
 const FormInput = styled.input`

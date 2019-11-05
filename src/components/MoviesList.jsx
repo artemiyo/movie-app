@@ -16,7 +16,7 @@ import Pagination from './Pagination';
 
 const MovieList = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 4rem;
 `;

@@ -43,7 +43,7 @@ const Discover = ({
     animateScroll.scrollToTop({
       smooth: true
     });
-    return () => getSelectedMenu();
+    return () => fetchMoviesStart();
   }, [match.params.name, params.page]);
 
   return (

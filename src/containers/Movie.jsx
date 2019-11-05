@@ -90,7 +90,7 @@ const Movie = ({
     fetchMovieStart();
     setMovieBackground();
     fetchPostersStart();
-    return () => getMovieID();
+    return () => fetchMovieStart();
   }, [match.params.id]);
 
   if (isMovieLoading || isPostersLoading) return <Loader />;

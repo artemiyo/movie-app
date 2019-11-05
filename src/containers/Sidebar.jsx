@@ -16,6 +16,14 @@ const SidebarWrapper = styled.div`
   background-color: ${props => props.theme.colors.sidebar};
   z-index: 1;
   overflow-x: hidden;
+
+  @media ${props => props.theme.mediaQueries.larger} {
+    width: 23%;
+  }
+
+  @media ${props => props.theme.mediaQueries.large} {
+    left: -40%;
+  }
 `;
 
 // ========================== STYLES:BEGIN ========================== //

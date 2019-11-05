@@ -24,6 +24,10 @@ const LogoLink = styled(Link)`
     text-transform: uppercase;
     color: ${props => props.theme.colors.main};
     text-decoration: none;
+
+    @media ${props => props.theme.mediaQueries.largest} {
+      font-size: 2rem;
+    }
   }
 `;
 
