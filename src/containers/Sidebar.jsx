@@ -22,6 +22,8 @@ const SidebarWrapper = styled.div`
   }
 
   @media ${props => props.theme.mediaQueries.large} {
+    position: absolute;
+
     left: -40%;
   }
 `;
