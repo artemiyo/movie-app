@@ -9,7 +9,8 @@ const INITIAL_STATE = {
     { id: 3, name: 'Upcoming' }
   ],
   errorMessage: '',
-  selectedMenu: ''
+  selectedMenu: '',
+  isToggle: false
 };
 
 const navigationReducer = (state = INITIAL_STATE, action) => {
@@ -34,7 +35,13 @@ const navigationReducer = (state = INITIAL_STATE, action) => {
     case navigationTypes.GET_SELECTED_MENU:
       return {
         ...state,
-        selectedMenu: action.payload
+        selectedMenu: action.payload,
+        isToggle: false
+      };
+    case navigationTypes.TOGGLE_MOBILE_MENU:
+      return {
+        ...state,
+        isToggle: !state.isToggle
       };
     default:
       return state;

@@ -42,7 +42,7 @@ const MoviesWrapper = styled.div`
 			rgba(${props.theme.colors.radial}, 0.9) 0%, 
 			rgba(${props.theme.colors.radial}, 0.9) 100%), 
 			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path});
-			// background-size: 100%;
+			// background-size: cover;
 			background-repeat: no-repeat`;
     } else {
       return `${props.theme.colors.body}`;
@@ -82,7 +82,8 @@ function App({
   fetchGenresStart,
   movieItem,
   deleteMovieBackground,
-  movieBackground
+  movieBackground,
+  isToggle
 }) {
   useEffect(() => {
     fetchGenresStart();
@@ -109,7 +110,7 @@ function App({
   ) : (
     <div className='App'>
       <MainWrapper>
-        <Sidebar />
+        <Sidebar isToggle={isToggle} />
         <MoviesWrapper movieBackground={movieBackground} movieItem={movieItem}>
           <SearchPanel>
             {isMobile ? <MobileMenu /> : null}
@@ -151,10 +152,11 @@ function App({
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  isNavigationLoading: selectIsNavigationLoading,
-  movieItem: selectMovieItem,
-  movieBackground: selectMovieBackground
+const mapStateToProps = state => ({
+  isNavigationLoading: selectIsNavigationLoading(state),
+  movieItem: selectMovieItem(state),
+  movieBackground: selectMovieBackground(state),
+  isToggle: state.navigation.isToggle
 });
 
 export default connect(

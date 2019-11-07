@@ -22,16 +22,23 @@ const SidebarWrapper = styled.div`
   }
 
   @media ${props => props.theme.mediaQueries.large} {
-    position: absolute;
-
-    left: -40%;
+    position: fixed;
+    width: 30%;
+    left: ${props => {
+      if (props.isToggle) {
+        return `0`;
+      } else {
+        return `-40%`;
+      }
+    }};
+    transition: left 0.3s ease;
   }
 `;
 
 // ========================== STYLES:BEGIN ========================== //
-const Sidebar = () => {
+const Sidebar = ({ isToggle }) => {
   return (
-    <SidebarWrapper>
+    <SidebarWrapper isToggle={isToggle}>
       <div>
         <Logo />
         <Navigation />

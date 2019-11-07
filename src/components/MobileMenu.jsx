@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import { toggleMobileMenu } from '../redux/navigation/navigationActions';
 
 const MobileMenuWrapper = styled.div`
-  position: relative;
+  position: fixed;
   cursor: pointer;
   z-index: 999;
 
@@ -13,14 +16,14 @@ const MobileMenuWrapper = styled.div`
   & > div:nth-child(1) {
     position: absolute;
     bottom: ${props => {
-      if (props.toggle) {
-        return `46%`;
+      if (props.isToggle) {
+        return `40%`;
       } else {
         return `100%`;
       }
     }};
     transform: ${props => {
-      if (props.toggle) {
+      if (props.isToggle) {
         return `rotate(45deg)`;
       } else {
         return `rotate(0)`;
@@ -31,7 +34,7 @@ const MobileMenuWrapper = styled.div`
   & > div:nth-child(2) {
     position: relative;
     opacity: ${props => {
-      if (props.toggle) {
+      if (props.isToggle) {
         return `0`;
       } else {
         return `1`;
@@ -42,14 +45,14 @@ const MobileMenuWrapper = styled.div`
   & > div:nth-child(3) {
     position: absolute;
     top: ${props => {
-      if (props.toggle) {
-        return `34%`;
+      if (props.isToggle) {
+        return `40%`;
       } else {
         return `100%`;
       }
     }};
     transform: ${props => {
-      if (props.toggle) {
+      if (props.isToggle) {
         return `rotate(-45deg)`;
       } else {
         return `rotate(0)`;
@@ -60,8 +63,8 @@ const MobileMenuWrapper = styled.div`
 
 const MenuBlock = styled.div`
   position: relative;
-  width: 3rem;
-  height: 3px;
+  width: 2rem;
+  height: 2px;
   background-color: ${props => props.theme.colors.main};
 
   &:nth-child(2) {
@@ -69,11 +72,9 @@ const MenuBlock = styled.div`
   }
 `;
 
-const MobileMenu = () => {
-  const [toggle, setToggle] = useState(false);
-
+const MobileMenu = ({ isToggle, toggleMobileMenu }) => {
   return (
-    <MobileMenuWrapper toggle={toggle} onClick={() => setToggle(!toggle)}>
+    <MobileMenuWrapper isToggle={isToggle} onClick={() => toggleMobileMenu()}>
       <MenuBlock />
       <MenuBlock />
       <MenuBlock />
@@ -81,4 +82,13 @@ const MobileMenu = () => {
   );
 };
 
-export default MobileMenu;
+const mapStateToProps = ({ navigation: { isToggle } }) => {
+  return {
+    isToggle
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { toggleMobileMenu }
+)(MobileMenu);

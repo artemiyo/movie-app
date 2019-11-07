@@ -26,3 +26,7 @@ export const getMenuId = id => ({
   type: navigationTypes.GET_MENU_ID,
   payload: id
 });
+
+export const toggleMobileMenu = () => ({
+  type: navigationTypes.TOGGLE_MOBILE_MENU
+});

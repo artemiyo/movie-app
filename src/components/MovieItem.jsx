@@ -25,6 +25,10 @@ const MovieLink = styled(Link)`
         return `2px solid ${props.theme.colors.sidebar}`;
       }
     }};
+
+    @media ${props => props.theme.mediaQueries.large} {
+      width: 24rem;
+    }
   }
 
   &:hover {
