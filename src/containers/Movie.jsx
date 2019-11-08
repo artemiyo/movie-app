@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
+import { animateScroll } from 'react-scroll';
 
 import Loader from '../components/Loader';
 import Button from '../components/Button';
@@ -28,17 +29,23 @@ import {
   sellectIsPostersLoading
 } from '../redux/posters/postersSelectors';
 
-const MovieWrapper = styled.div`
-  height: 100vh;
-`;
+const MovieWrapper = styled.div``;
 
 const MovieMain = styled.div`
   width: 80%;
+
+  @media ${props => props.theme.mediaQueries.medium} {
+    width: 100%;
+  }
 `;
 
 const MovieMainInformation = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media ${props => props.theme.mediaQueries.medium} {
+    flex-direction: column;
+  }
 `;
 
 const MovieTitle = styled.h1`
@@ -46,23 +53,40 @@ const MovieTitle = styled.h1`
   font-weight: bold;
   margin-bottom: 1rem;
   text-transform: uppercase;
+
+  @media ${props => props.theme.mediaQueries.larger} {
+    font-size: 3rem;
+  }
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 2rem;
+  }
 `;
 
 const MovieTagline = styled.h2`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 400;
   width: 90%;
   margin-bottom: 1rem;
   text-transform: uppercase;
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1.4rem;
+    width: 100%;
+  }
 `;
 
 const MovieDetails = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 100;
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1rem;
+  }
 `;
 
 const LinkToHome = styled(Link)`
-  display: block;
+  display: inline-block;
 `;
 
 const Movie = ({
@@ -88,6 +112,9 @@ const Movie = ({
   useEffect(() => {
     getMovieID(match.params.id);
     fetchMovieStart();
+    animateScroll.scrollToTop({
+      smooth: true
+    });
     setMovieBackground();
     fetchPostersStart();
     return () => fetchMovieStart();

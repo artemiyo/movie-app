@@ -8,23 +8,56 @@ const MovieSubTitle = styled.h3`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 2rem;
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1.1rem;
+  }
 `;
 
-const PostersList = styled.ul``;
+const PostersList = styled.ul`
+  @media ${props => props.theme.mediaQueries.medium} {
+    display: flex;
+    overflow-x: scroll;
+    margin-bottom: 1rem;
+  }
+`;
 
 const PosterItem = styled.li`
   display: block;
   width: 35rem;
   height: 20rem;
 
+  @media ${props => props.theme.mediaQueries.larger} {
+    width: 28rem;
+    height: 15rem;
+  }
+
+  @media ${props => props.theme.mediaQueries.medium} {
+    width: 100%;
+    height: 100%;
+    &:not(:last-child) {
+      margin-right: 3rem;
+    }
+  }
+
   &:not(:last-child) {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 `;
 
 const PosterImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 37rem;
+  height: 21rem;
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    width: 32rem;
+    height: 19rem;
+  }
+
+  @media ${props => props.theme.mediaQueries.smallest} {
+    width: 24rem;
+    height: 14rem;
+  }
 `;
 
 // ========================== STYLES:END ========================== //

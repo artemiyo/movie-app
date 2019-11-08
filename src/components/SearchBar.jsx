@@ -29,7 +29,7 @@ const Form = styled.form`
 
   @media ${props => props.theme.mediaQueries.smaller} {
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 3rem;
   }
 `;
 

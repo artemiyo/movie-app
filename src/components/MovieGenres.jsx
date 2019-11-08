@@ -9,6 +9,10 @@ const MovieSubTitle = styled.h3`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 2rem;
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1.1rem;
+  }
 `;
 
 const MovieGenresWrapper = styled.div`
@@ -28,6 +32,10 @@ const GenreLink = styled(Link)`
     text-transform: uppercase;
     text-decoration: none;
     color: ${props => props.theme.colors.main};
+
+    @media ${props => props.theme.mediaQueries.smaller} {
+      font-size: 1rem;
+    }
 
     &:not(:last-child) {
       margin-right: 1.5rem;

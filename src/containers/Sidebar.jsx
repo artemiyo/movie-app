@@ -23,8 +23,6 @@ const SidebarWrapper = styled.div`
 
   @media ${props => props.theme.mediaQueries.large} {
     position: fixed;
-    scroll-behavior: auto;
-    z-index: 500;
     width: 40%;
     left: ${props => {
       if (props.isToggle) {

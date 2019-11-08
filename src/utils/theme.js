@@ -9,7 +9,7 @@ const theme = {
     radial: '20, 28, 37'
   },
   mediaQueries: {
-    smallest: `only screen and (max-width: 25em)`,
+    smallest: `only screen and (max-width: 24.375em)`, //390
     smaller: `only screen and (max-width: 30em)`, //480
     small: `only screen and (max-width: 33.75em)`, // 540
     medium: `only screen and (max-width: 51.25em)`, // 820

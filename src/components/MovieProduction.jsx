@@ -8,6 +8,10 @@ const MovieSubTitle = styled.h3`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 2rem;
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1.1rem;
+  }
 `;
 
 const MovieProductionWrapper = styled.div`
@@ -23,6 +27,10 @@ const MovieItemProduction = styled.li`
 
   &:not(:last-child) {
     margin-bottom: 1rem;
+  }
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1rem;
   }
 `;
 

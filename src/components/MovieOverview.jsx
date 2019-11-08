@@ -13,6 +13,10 @@ const MovieSubTitle = styled.h3`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 2rem;
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1.2rem;
+  }
 `;
 
 const MovieOverviewText = styled.p`
@@ -20,6 +24,14 @@ const MovieOverviewText = styled.p`
   font-weight: 100;
   width: 70%;
   line-height: 1.8em;
+
+  @media ${props => props.theme.mediaQueries.medium} {
+    width: 100%;
+  }
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    font-size: 1.1rem;
+  }
 `;
 
 // ========================== STYLES:END ========================== //
