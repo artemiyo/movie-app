@@ -6,6 +6,7 @@ import { toggleMobileMenu } from '../redux/navigation/navigationActions';
 
 const MobileMenuWrapper = styled.div`
   position: fixed;
+  left: 10%;
   cursor: pointer;
   z-index: 999;
 

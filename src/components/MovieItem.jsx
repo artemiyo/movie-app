@@ -29,6 +29,10 @@ const MovieLink = styled(Link)`
     @media ${props => props.theme.mediaQueries.large} {
       width: 24rem;
     }
+
+    @media ${props => props.theme.mediaQueries.medium} {
+      width: 22rem;
+    }
   }
 
   &:hover {
@@ -43,6 +47,14 @@ const MovieImageWrapper = styled.div`
   position: relative;
   max-width: 100%;
   height: 35rem;
+
+  @media ${props => props.theme.mediaQueries.medium} {
+    height: 31rem;
+  }
+
+  @media ${props => props.theme.mediaQueries.small} {
+    height: 31rem;
+  }
 `;
 
 const ImageLoading = styled.div`

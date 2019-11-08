@@ -19,6 +19,11 @@ const MovieList = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 4rem;
+
+  @media ${props => props.theme.mediaQueries.small} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 // ========================== STYLES:BEGIN ========================== //

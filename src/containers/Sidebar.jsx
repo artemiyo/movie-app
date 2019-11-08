@@ -23,15 +23,29 @@ const SidebarWrapper = styled.div`
 
   @media ${props => props.theme.mediaQueries.large} {
     position: fixed;
-    width: 30%;
+    scroll-behavior: auto;
+    z-index: 500;
+    width: 40%;
     left: ${props => {
       if (props.isToggle) {
         return `0`;
       } else {
-        return `-40%`;
+        return `-100%`;
       }
     }};
-    transition: left 0.3s ease;
+    transition: left 0.2s ease-in;
+  }
+
+  @media ${props => props.theme.mediaQueries.medium} {
+    width: 50%;
+  }
+
+  @media ${props => props.theme.mediaQueries.small} {
+    width: 60%;
+  }
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    width: 80%;
   }
 `;
 

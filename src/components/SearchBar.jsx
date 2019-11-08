@@ -20,6 +20,16 @@ const Form = styled.form`
 
   @media ${props => props.theme.mediaQueries.large} {
     margin-left: auto;
+    width: 38rem;
+  }
+
+  @media ${props => props.theme.mediaQueries.small} {
+    width: 25rem;
+  }
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    width: 100%;
+    margin-top: 5rem;
   }
 `;
 

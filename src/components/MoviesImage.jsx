@@ -6,7 +6,7 @@ import NoPoster from './NoPoster';
 // ========================== STYLES:BEGIN ========================== //
 
 const MovieImage = styled.img`
-  min-width: 100%;
+  width: 100%;
   height: 100%;
 `;
 

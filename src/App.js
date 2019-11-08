@@ -42,7 +42,7 @@ const MoviesWrapper = styled.div`
 			rgba(${props.theme.colors.radial}, 0.9) 0%, 
 			rgba(${props.theme.colors.radial}, 0.9) 100%), 
 			url(https://image.tmdb.org/t/p/original/${props.movieItem.backdrop_path});
-			// background-size: cover;
+			background-size: cover;
 			background-repeat: no-repeat`;
     } else {
       return `${props.theme.colors.body}`;
@@ -58,6 +58,7 @@ const MoviesWrapper = styled.div`
   @media ${props => props.theme.mediaQueries.large} {
     width: 100%;
     margin-left: 0;
+    padding: 4rem;
   }
 `;
 
@@ -73,6 +74,10 @@ const SearchPanel = styled.div`
 
   @media ${props => props.theme.mediaQueries.large} {
     align-items: center;
+  }
+
+  @media ${props => props.theme.mediaQueries.smaller} {
+    flex-direction: column;
   }
 `;
 // ========================== STYLES:END ========================== //

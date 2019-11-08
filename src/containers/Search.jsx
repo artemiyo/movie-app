@@ -23,6 +23,10 @@ const Title = styled.h1`
   font-size: 2.5rem;
   font-weight: 400;
   text-transform: uppercase;
+
+  @media ${props => props.theme.mediaQueries.large} {
+    font-size: 2rem;
+  }
 `;
 
 // ========================== STYLES:END ========================== //
