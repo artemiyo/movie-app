@@ -17,7 +17,8 @@ import MoviePosters from '../components/MoviePosters';
 import {
   fetchMovieStart,
   getMovieID,
-  setMovieBackground
+  setMovieBackground,
+  deleteMovieBackground
 } from '../redux/movie/movieActions';
 import { fetchPostersStart } from '../redux/posters/postersActions';
 import {
@@ -98,7 +99,8 @@ const Movie = ({
   postersList,
   isPostersLoading,
   isMovieLoading,
-  setMovieBackground
+  setMovieBackground,
+  deleteMovieBackground
 }) => {
   const {
     title,
@@ -117,7 +119,7 @@ const Movie = ({
     });
     setMovieBackground();
     fetchPostersStart();
-    return () => fetchMovieStart();
+    return () => deleteMovieBackground();
   }, [match.params.id]);
 
   if (isMovieLoading || isPostersLoading) return <Loader />;
@@ -156,6 +158,12 @@ export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { fetchMovieStart, getMovieID, fetchPostersStart, setMovieBackground }
+    {
+      fetchMovieStart,
+      getMovieID,
+      fetchPostersStart,
+      setMovieBackground,
+      deleteMovieBackground
+    }
   )
 )(Movie);

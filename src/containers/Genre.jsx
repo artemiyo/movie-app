@@ -41,13 +41,13 @@ const Genre = ({
   const params = queryString.parse(location.search);
   useEffect(() => {
     getSelectedMenu(match.params.name);
-    deleteMovieBackground();
+
     fetchMoviesByGenresStart(params.page);
 
     animateScroll.scrollToTop({
       smooth: true
     });
-    return () => fetchMoviesByGenresStart();
+    return () => deleteMovieBackground();
   }, [match.params.name, params.page]);
   return (
     <div>

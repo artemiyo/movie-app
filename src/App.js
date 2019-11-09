@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
 import Sidebar from './containers/Sidebar';
 import SearchBar from './components/SearchBar';
@@ -108,7 +107,6 @@ function App({
 }) {
   useEffect(() => {
     fetchGenresStart();
-    deleteMovieBackground();
   }, []);
   const [isMobile, setisMobile] = useState(null);
   // set mobile menu when media query is <= 68.75em(1100px)

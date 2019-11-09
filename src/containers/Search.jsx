@@ -46,12 +46,11 @@ const Search = ({
 
   useEffect(() => {
     getQueryValue(match.params.query);
-    deleteMovieBackground();
     fetchMoviesSearchStart(params.page);
     animateScroll.scrollToTop({
       smooth: true
     });
-    return () => fetchMoviesSearchStart();
+    return () => deleteMovieBackground();
   }, [params.page, match.params.query]);
 
   if (total_results === 0 || !results) {
