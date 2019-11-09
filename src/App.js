@@ -101,7 +101,6 @@ function App({
   isNavigationLoading,
   fetchGenresStart,
   movieItem,
-  deleteMovieBackground,
   movieBackground,
   isToggle
 }) {
