@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilm } from "@fortawesome/free-solid-svg-icons";
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -36,7 +36,7 @@ const LogoLink = styled(Link)`
 const Logo = () => {
   return (
     <LogoWrapper>
-      <LogoLink to='/'>
+      <LogoLink to={process.env.PUBLIC_URL + "/"}>
         <LogoIcon icon={faFilm} />
         Movies
       </LogoLink>

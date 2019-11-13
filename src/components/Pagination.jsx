@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import Button from './Button';
+import Button from "./Button";
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -11,12 +11,12 @@ const PaginationWrapper = styled.div`
   display: flex;
   justify-content: ${props => {
     switch (props.type) {
-      case 'next':
-        return 'flex-end';
-      case 'prev':
-        return 'flex-start';
+      case "next":
+        return "flex-end";
+      case "prev":
+        return "flex-start";
       default:
-        return 'space-between';
+        return "space-between";
     }
   }};
 `;
@@ -33,7 +33,7 @@ const Pagination = ({ movies }) => {
   if (total_pages === 0 || !results) {
     return (
       <PaginationWrapper>
-        <Link to='/'>
+        <Link to={`${process.env.PUBLIC_URL}`}>
           <Button>Home</Button>
         </Link>
       </PaginationWrapper>
@@ -42,7 +42,7 @@ const Pagination = ({ movies }) => {
 
   if (page < total_pages && page === 1) {
     return (
-      <PaginationWrapper type='next'>
+      <PaginationWrapper type="next">
         <Link to={`${process.env.PUBLIC_URL}?page=${page + 1}`}>
           <Button>Next Page</Button>
         </Link>
@@ -61,7 +61,7 @@ const Pagination = ({ movies }) => {
     );
   } else {
     return (
-      <PaginationWrapper type='prev'>
+      <PaginationWrapper type="prev">
         <Link to={`${process.env.PUBLIC_URL}?page=${page - 1}`}>
           <Button>Prev Page</Button>
         </Link>

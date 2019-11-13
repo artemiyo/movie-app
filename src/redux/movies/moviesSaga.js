@@ -1,6 +1,6 @@
-import { takeLatest, put, call, all, select } from 'redux-saga/effects';
-import tmdb from '../../api/tmdb';
-import moviesTypes from './moviesTypes';
+import { takeLatest, put, call, all, select } from "redux-saga/effects";
+import tmdb from "../../api/tmdb";
+import moviesTypes from "./moviesTypes";
 
 import {
   fetchMoviesSuccess,
@@ -9,16 +9,16 @@ import {
   fetchMoviesByGenresFailure,
   fetchMoviesSearchSuccess,
   fetchMoviesSearchFailure
-} from './moviesActions';
+} from "./moviesActions";
 
 // Fetch movies by discover category
 export function* fetchMoviesAsync() {
   const getState = yield select();
   const movieCategory = getState.navigation.selectedMenu
     .toLowerCase()
-    .replace(' ', '_');
+    .replace(" ", "_");
   const page = getState.movies.page;
-  const response = yield tmdb.get(`/movie/${movieCategory}/`, {
+  const response = yield tmdb.get(`/movie/${movieCategory}`, {
     params: {
       api_key: process.env.REACT_APP_KEY,
       page
@@ -40,9 +40,9 @@ export function* fetchMoviesByGenresAsync() {
   const genreId = genresList
     .filter(el => el.name.toLowerCase() === selectedMenu)
     .map(el => el.id)
-    .join('');
+    .join("");
 
-  const response = yield tmdb.get(`/discover/movie/`, {
+  const response = yield tmdb.get(`/discover/movie`, {
     params: {
       api_key: process.env.REACT_APP_KEY,
       with_genres: genreId,
@@ -63,7 +63,7 @@ export function* fetchMoviesSearchAsync() {
   const page = getState.movies.page;
   const query = getState.movies.query;
 
-  const response = yield tmdb.get(`/search/movie/`, {
+  const response = yield tmdb.get(`/search/movie`, {
     params: {
       api_key: process.env.REACT_APP_KEY,
       query,
