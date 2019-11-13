@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -24,12 +24,12 @@ const PostersList = styled.ul`
 
 const PosterItem = styled.li`
   display: block;
-  width: 35rem;
-  height: 20rem;
+  width: 37rem;
+  height: 21rem;
 
   @media ${props => props.theme.mediaQueries.larger} {
-    width: 28rem;
-    height: 15rem;
+    width: 32rem;
+    height: 19rem;
   }
 
   @media ${props => props.theme.mediaQueries.medium} {
@@ -41,13 +41,13 @@ const PosterItem = styled.li`
   }
 
   &:not(:last-child) {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
   }
 `;
 
 const PosterImage = styled.img`
-  width: 37rem;
-  height: 21rem;
+  width: 32rem;
+  height: 19rem;
 
   @media ${props => props.theme.mediaQueries.smaller} {
     width: 32rem;

@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // ========================== STYLES:BEGIN ========================== //
 
@@ -20,7 +20,6 @@ const MovieGenresWrapper = styled.div`
 `;
 
 const GenresList = styled.ul`
-  display: flex;
   margin-bottom: 4rem;
 `;
 
@@ -63,7 +62,8 @@ const MovieGenres = ({ genres }) => {
         {genres.map(({ name, id }) => (
           <GenreLink
             key={id}
-            to={`${process.env.PUBLIC_URL}/genres/${name.toLowerCase()}`}>
+            to={`${process.env.PUBLIC_URL}/genres/${name.toLowerCase()}`}
+          >
             <GenreItem>{name}</GenreItem>
           </GenreLink>
         ))}
